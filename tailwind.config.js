@@ -1,7 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
-    "./**/*.{razor,html,cshtml}"
+    "./**/*.razor",
+    "./**/*.html",
+    "./Pages/**/*.razor",
+    "./Layout/**/*.razor"
   ],
   theme: {
     extend: {},
