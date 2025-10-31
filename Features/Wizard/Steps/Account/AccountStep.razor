@@ -1,21 +1,41 @@
 @using WAAI.Features.Wizard.Steps.Account
+@using FluentValidation
+@inject IValidator<AccountInfo> Validator
 
 <div class="space-y-4">
     <h2 class="text-2xl font-bold text-gray-800 mb-4">Account Details</h2>
     <div>
         <label class="block text-sm font-medium text-gray-700 mb-2">Username <span class="text-red-500">*</span></label>
-        <input @bind="AccountInfo.Username" type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none" placeholder="johndoe" />
+        <input @bind="AccountInfo.Username" @bind:event="oninput" type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none" placeholder="johndoe" />
+        @if (GetError(nameof(AccountInfo.Username)) is { } usernameError)
+        {
+            <p class="text-red-500 text-sm mt-1">@usernameError</p>
+        }
     </div>
     <div>
         <label class="block text-sm font-medium text-gray-700 mb-2">Password <span class="text-red-500">*</span></label>
-        <input @bind="AccountInfo.Password" type="password" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none" placeholder="••••••••" />
+        <input @bind="AccountInfo.Password" @bind:event="oninput" type="password" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none" placeholder="••••••••" />
+        @if (GetError(nameof(AccountInfo.Password)) is { } passwordError)
+        {
+            <p class="text-red-500 text-sm mt-1">@passwordError</p>
+        }
     </div>
     <div>
         <label class="block text-sm font-medium text-gray-700 mb-2">Confirm Password <span class="text-red-500">*</span></label>
-        <input @bind="AccountInfo.ConfirmPassword" type="password" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none" placeholder="••••••••" />
+        <input @bind="AccountInfo.ConfirmPassword" @bind:event="oninput" type="password" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none" placeholder="••••••••" />
+        @if (GetError(nameof(AccountInfo.ConfirmPassword)) is { } confirmError)
+        {
+            <p class="text-red-500 text-sm mt-1">@confirmError</p>
+        }
     </div>
 </div>
 
 @code {
     [Parameter] public AccountInfo AccountInfo { get; set; } = new();
+
+    private string? GetError(string propertyName)
+    {
+        var result = Validator.Validate(AccountInfo);
+        return result.Errors.FirstOrDefault(e => e.PropertyName == propertyName)?.ErrorMessage;
+    }
 }
