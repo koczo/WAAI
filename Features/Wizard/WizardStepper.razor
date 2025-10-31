@@ -1,0 +1,41 @@
+<div class="flex items-center justify-between mb-8">
+    <div class="flex items-center gap-4 flex-1">
+        <div class="flex items-center gap-2">
+            <div class="@GetStepClass(WizardStep.Personal)">1</div>
+            <span class="@GetStepTextClass(WizardStep.Personal)">Personal</span>
+        </div>
+        <div class="flex-1 h-1 @GetLineClass(WizardStep.Personal)"></div>
+        
+        <div class="flex items-center gap-2">
+            <div class="@GetStepClass(WizardStep.Account)">2</div>
+            <span class="@GetStepTextClass(WizardStep.Account)">Account</span>
+        </div>
+        <div class="flex-1 h-1 @GetLineClass(WizardStep.Account)"></div>
+        
+        <div class="flex items-center gap-2">
+            <div class="@GetStepClass(WizardStep.Preferences)">3</div>
+            <span class="@GetStepTextClass(WizardStep.Preferences)">Preferences</span>
+        </div>
+        <div class="flex-1 h-1 @GetLineClass(WizardStep.Preferences)"></div>
+        
+        <div class="flex items-center gap-2">
+            <div class="@GetStepClass(WizardStep.Complete)">4</div>
+            <span class="@GetStepTextClass(WizardStep.Complete)">Complete</span>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter] public WizardStep CurrentStep { get; set; }
+
+    private string GetStepClass(WizardStep step) =>
+        CurrentStep >= step
+            ? "w-10 h-10 rounded-full bg-indigo-600 text-white flex items-center justify-center font-bold"
+            : "w-10 h-10 rounded-full bg-gray-300 text-gray-600 flex items-center justify-center font-bold";
+
+    private string GetStepTextClass(WizardStep step) =>
+        CurrentStep >= step ? "font-semibold text-indigo-600" : "text-gray-500";
+
+    private string GetLineClass(WizardStep step) =>
+        CurrentStep > step ? "bg-indigo-600" : "bg-gray-300";
+}

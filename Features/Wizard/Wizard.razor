@@ -1,5 +1,9 @@
 @page "/wizard"
 @using WAAI.Features.Wizard
+@using WAAI.Features.Wizard.Steps.Personal
+@using WAAI.Features.Wizard.Steps.Account
+@using WAAI.Features.Wizard.Steps.Preferences
+@using WAAI.Features.Wizard.Steps.Complete
 @using System.ComponentModel.DataAnnotations
 
 <PageTitle>Wizard</PageTitle>
@@ -8,128 +12,30 @@
     <h1 class="text-4xl font-bold text-gray-800 mb-8">Setup Wizard</h1>
     
     <div class="bg-white rounded-2xl shadow-xl p-8">
-        <div class="flex items-center justify-between mb-8">
-            <div class="flex items-center gap-4 flex-1">
-                <div class="flex items-center gap-2">
-                    <div class="@GetStepClass(WizardStep.Personal)">1</div>
-                    <span class="@GetStepTextClass(WizardStep.Personal)">Personal</span>
-                </div>
-                <div class="flex-1 h-1 @GetLineClass(WizardStep.Personal)"></div>
-                
-                <div class="flex items-center gap-2">
-                    <div class="@GetStepClass(WizardStep.Account)">2</div>
-                    <span class="@GetStepTextClass(WizardStep.Account)">Account</span>
-                </div>
-                <div class="flex-1 h-1 @GetLineClass(WizardStep.Account)"></div>
-                
-                <div class="flex items-center gap-2">
-                    <div class="@GetStepClass(WizardStep.Preferences)">3</div>
-                    <span class="@GetStepTextClass(WizardStep.Preferences)">Preferences</span>
-                </div>
-                <div class="flex-1 h-1 @GetLineClass(WizardStep.Preferences)"></div>
-                
-                <div class="flex items-center gap-2">
-                    <div class="@GetStepClass(WizardStep.Complete)">4</div>
-                    <span class="@GetStepTextClass(WizardStep.Complete)">Complete</span>
-                </div>
-            </div>
-        </div>
+        <WizardStepper CurrentStep="_currentStep" />
 
-        @switch (currentStep)
+        @switch (_currentStep)
         {
             case WizardStep.Personal:
-                <div class="space-y-4">
-                    <h2 class="text-2xl font-bold text-gray-800 mb-4">Personal Information</h2>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
-                        <input @bind="personalInfo.FullName" type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none" placeholder="John Doe" />
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
-                        <input @bind="personalInfo.Email" type="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none" placeholder="john@example.com" />
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Phone</label>
-                        <input @bind="personalInfo.Phone" type="tel" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none" placeholder="+1 234 567 890" />
-                    </div>
-                </div>
+                <PersonalStep PersonalInfo="_personalInfo" />
                 break;
             case WizardStep.Account:
-                <div class="space-y-4">
-                    <h2 class="text-2xl font-bold text-gray-800 mb-4">Account Details</h2>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Username</label>
-                        <input @bind="accountInfo.Username" type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none" placeholder="johndoe" />
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Password</label>
-                        <input @bind="accountInfo.Password" type="password" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none" placeholder="••••••••" />
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Confirm Password</label>
-                        <input @bind="accountInfo.ConfirmPassword" type="password" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none" placeholder="••••••••" />
-                    </div>
-                </div>
+                <AccountStep AccountInfo="_accountInfo" />
                 break;
             case WizardStep.Preferences:
-                <div class="space-y-4">
-                    <h2 class="text-2xl font-bold text-gray-800 mb-4">Preferences</h2>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Language</label>
-                        <select @bind="preferencesInfo.Language" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none">
-                            <option value="en">English</option>
-                            <option value="pl">Polish</option>
-                            <option value="de">German</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Theme</label>
-                        <div class="grid grid-cols-3 gap-4">
-                            <button @onclick="SetThemeLight" class="@GetThemeButtonClass("light") p-4 rounded-lg hover:border-indigo-400 transition">
-                                <div class="text-3xl mb-2">☀️</div>
-                                <p class="text-sm font-medium">Light</p>
-                            </button>
-                            <button @onclick="SetThemeDark" class="@GetThemeButtonClass("dark") p-4 rounded-lg hover:border-indigo-400 transition">
-                                <div class="text-3xl mb-2">🌙</div>
-                                <p class="text-sm font-medium">Dark</p>
-                            </button>
-                            <button @onclick="SetThemeAuto" class="@GetThemeButtonClass("auto") p-4 rounded-lg hover:border-indigo-400 transition">
-                                <div class="text-3xl mb-2">⚙️</div>
-                                <p class="text-sm font-medium">Auto</p>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <input @bind="preferencesInfo.Newsletter" type="checkbox" class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" />
-                        <label class="text-sm text-gray-600">Subscribe to newsletter</label>
-                    </div>
-                </div>
+                <PreferencesStep PreferencesInfo="_preferencesInfo" />
                 break;
             case WizardStep.Complete:
-                <div class="text-center py-8">
-                    <div class="text-6xl mb-4">🎉</div>
-                    <h2 class="text-3xl font-bold text-gray-800 mb-4">All Done!</h2>
-                    <p class="text-gray-600 mb-6">Your account has been successfully created.</p>
-                    <div class="bg-gray-50 rounded-xl p-6 text-left max-w-md mx-auto">
-                        <h3 class="font-bold text-gray-800 mb-4">Summary:</h3>
-                        <div class="space-y-2 text-sm">
-                            <p><span class="text-gray-500">Name:</span> <span class="font-medium">@personalInfo.FullName</span></p>
-                            <p><span class="text-gray-500">Email:</span> <span class="font-medium">@personalInfo.Email</span></p>
-                            <p><span class="text-gray-500">Username:</span> <span class="font-medium">@accountInfo.Username</span></p>
-                            <p><span class="text-gray-500">Language:</span> <span class="font-medium">@preferencesInfo.Language</span></p>
-                            <p><span class="text-gray-500">Theme:</span> <span class="font-medium">@preferencesInfo.Theme</span></p>
-                        </div>
-                    </div>
-                </div>
+                <CompleteStep PersonalInfo="_personalInfo" AccountInfo="_accountInfo" PreferencesInfo="_preferencesInfo" />
                 break;
         }
 
         <div class="flex justify-between mt-8 pt-6 border-t border-gray-200">
-            <button @onclick="PreviousStep" disabled="@(currentStep == WizardStep.Personal)" class="@(currentStep == WizardStep.Personal ? "bg-gray-300 cursor-not-allowed" : "bg-gray-600 hover:bg-gray-700") text-white px-6 py-3 rounded-lg font-semibold transition">
+            <button @onclick="PreviousStep" disabled="@(_currentStep == WizardStep.Personal)" class="@(_currentStep == WizardStep.Personal ? "bg-gray-300 cursor-not-allowed" : "bg-gray-600 hover:bg-gray-700") text-white px-6 py-3 rounded-lg font-semibold transition">
                 ← Previous
             </button>
             
-            @if (currentStep < WizardStep.Complete)
+            @if (_currentStep < WizardStep.Complete)
             {
                 <button @onclick="NextStep" disabled="@(!CanProceed())" class="@(CanProceed() ? "bg-indigo-600 hover:bg-indigo-700" : "bg-gray-300 cursor-not-allowed") text-white px-6 py-3 rounded-lg font-semibold transition">
                     Next →
@@ -146,45 +52,24 @@
 </div>
 
 @code {
-    private enum WizardStep { Personal, Account, Preferences, Complete }
-    private WizardStep currentStep = WizardStep.Personal;
+    private WizardStep _currentStep = WizardStep.Personal;
     
-    private PersonalInfo personalInfo = new();
-    private AccountInfo accountInfo = new();
-    private PreferencesInfo preferencesInfo = new();
+    private readonly PersonalInfo _personalInfo = new();
+    private readonly AccountInfo _accountInfo = new();
+    private readonly PreferencesInfo _preferencesInfo = new();
 
-    private void NextStep() => currentStep++;
-    private void PreviousStep() => currentStep--;
-    private void Finish() => currentStep = WizardStep.Personal;
-    
-    private void SetThemeLight() => preferencesInfo.Theme = "light";
-    private void SetThemeDark() => preferencesInfo.Theme = "dark";
-    private void SetThemeAuto() => preferencesInfo.Theme = "auto";
+    private void NextStep() => _currentStep++;
+    private void PreviousStep() => _currentStep--;
+    private void Finish() => _currentStep = WizardStep.Personal;
 
     private bool CanProceed()
     {
-        var context = new ValidationContext(currentStep switch
+        var context = new ValidationContext(_currentStep switch
         {
-            WizardStep.Personal => personalInfo,
-            WizardStep.Account => accountInfo,
-            _ => preferencesInfo
+            WizardStep.Personal => _personalInfo,
+            WizardStep.Account => _accountInfo,
+            _ => _preferencesInfo
         });
         return Validator.TryValidateObject(context.ObjectInstance, context, null, true);
     }
-
-    private string GetStepClass(WizardStep step) =>
-        currentStep >= step
-            ? "w-10 h-10 rounded-full bg-indigo-600 text-white flex items-center justify-center font-bold"
-            : "w-10 h-10 rounded-full bg-gray-300 text-gray-600 flex items-center justify-center font-bold";
-
-    private string GetStepTextClass(WizardStep step) =>
-        currentStep >= step ? "font-semibold text-indigo-600" : "text-gray-500";
-
-    private string GetLineClass(WizardStep step) =>
-        currentStep > step ? "bg-indigo-600" : "bg-gray-300";
-
-    private string GetThemeButtonClass(string themeValue) =>
-        preferencesInfo.Theme == themeValue
-            ? "border-2 border-indigo-600 bg-indigo-50"
-            : "border-2 border-gray-300";
 }
