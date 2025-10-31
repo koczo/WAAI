@@ -1,31 +1,18 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="">WAAI</a>
-        <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    </div>
+﻿<div class="p-6 border-b border-indigo-500">
+    <a class="text-2xl font-bold" href="">WAAI</a>
 </div>
 
-<div class="@NavMenuCssClass nav-scrollable" @onclick="ToggleNavMenu">
-    <nav class="nav flex-column">
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="counter">
-                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Counter
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="weather">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Weather
-            </NavLink>
-        </div>
-    </nav>
-</div>
+<nav class="flex flex-col p-4 space-y-2">
+    <NavLink class="px-4 py-3 rounded-lg hover:bg-indigo-500 transition" href="" Match="NavLinkMatch.All">
+        🏠 Home
+    </NavLink>
+    <NavLink class="px-4 py-3 rounded-lg hover:bg-indigo-500 transition" href="counter">
+        ➕ Counter
+    </NavLink>
+    <NavLink class="px-4 py-3 rounded-lg hover:bg-indigo-500 transition" href="weather">
+        🌤️ Weather
+    </NavLink>
+</nav>
 
 @code {
     private bool collapseNavMenu = true;
