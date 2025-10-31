@@ -1,10 +1,12 @@
 @page "/wizard"
-@using WAAI.Features.Wizard
 @using WAAI.Features.Wizard.Steps.Personal
 @using WAAI.Features.Wizard.Steps.Account
 @using WAAI.Features.Wizard.Steps.Preferences
 @using WAAI.Features.Wizard.Steps.Complete
-@using System.ComponentModel.DataAnnotations
+@using FluentValidation
+@inject IValidator<PersonalInfo> PersonalValidator
+@inject IValidator<AccountInfo> AccountValidator
+@inject IValidator<PreferencesInfo> PreferencesValidator
 
 <PageTitle>Wizard</PageTitle>
 
@@ -64,12 +66,12 @@
 
     private bool CanProceed()
     {
-        var context = new ValidationContext(_currentStep switch
+        var result = _currentStep switch
         {
-            WizardStep.Personal => _personalInfo,
-            WizardStep.Account => _accountInfo,
-            _ => _preferencesInfo
-        });
-        return Validator.TryValidateObject(context.ObjectInstance, context, null, true);
+            WizardStep.Personal => PersonalValidator.Validate(_personalInfo),
+            WizardStep.Account => AccountValidator.Validate(_accountInfo),
+            _ => PreferencesValidator.Validate(_preferencesInfo)
+        };
+        return result.IsValid;
     }
 }
