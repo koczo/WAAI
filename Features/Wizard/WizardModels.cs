@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace WAAI.Models;
+namespace WAAI.Features.Wizard;
 
 public record PersonalInfo
 {
