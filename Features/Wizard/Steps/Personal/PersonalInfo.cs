@@ -1,6 +1,6 @@
 namespace WAAI.Features.Wizard.Steps.Personal;
 
-public record PersonalInfo
+public class PersonalInfo
 {
     public string FullName { get; set; } = "";
     public string Email { get; set; } = "";

@@ -1,6 +1,6 @@
 namespace WAAI.Features.Wizard.Steps.Preferences;
 
-public record PreferencesInfo
+public class PreferencesInfo
 {
     public string Language { get; set; } = "en";
     public string Theme { get; set; } = "light";
