@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
+    "build": "npm run build:css",
     "build:css": "npx @tailwindcss/cli@latest -i ./wwwroot/css/app.css -o ./wwwroot/css/output.css --minify",
     "watch:css": "npx @tailwindcss/cli@latest -i ./wwwroot/css/app.css -o ./wwwroot/css/output.css --watch"
   },
