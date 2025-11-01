@@ -1,0 +1,92 @@
+@page "/changelog"
+@inject HttpClient Http
+
+<PageTitle>Changelog</PageTitle>
+
+<div class="max-w-4xl mx-auto">
+    <h1 class="text-4xl font-bold mb-8">Changelog</h1>
+
+    @if (_commits == null)
+    {
+        <div class="flex justify-center">
+            <span class="loading loading-infinity loading-lg text-primary"></span>
+        </div>
+    }
+    else if (!_commits.Any())
+    {
+        <div class="alert alert-info">
+            <span>No commits found.</span>
+        </div>
+    }
+    else
+    {
+        <ul class="timeline timeline-vertical">
+            @foreach (var commit in _commits)
+            {
+                <li>
+                    @if (commit != _commits.First())
+                    {
+                        <hr/>
+                    }
+                    <div class="timeline-start text-sm">@commit.Date.ToString("yyyy-MM-dd HH:mm")</div>
+                    <div class="timeline-middle">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                             class="w-5 h-5 text-primary">
+                            <path fill-rule="evenodd"
+                                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+                                  clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <div class="timeline-end timeline-box">
+                        <a href="@commit.Url" target="_blank" class="link link-primary font-semibold">
+                            @commit.Message
+                        </a>
+                        <p class="text-sm opacity-60">@(commit.Sha.Length > 7 ? commit.Sha.Substring(0, 7) : commit.Sha)</p>
+                    </div>
+                    @if (commit != _commits.Last())
+                    {
+                        <hr/>
+                    }
+                </li>
+            }
+        </ul>
+    }
+</div>
+
+@code {
+    private List<CommitInfo>? _commits;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            _commits = await Http.GetFromJsonAsync<List<CommitInfo>>("https://api.github.com/repos/koczo/WAAI/commits");
+        }
+        catch
+        {
+            _commits = new List<CommitInfo>();
+        }
+    }
+
+    private class CommitInfo
+    {
+        public string Sha { get; set; } = string.Empty;
+        public CommitDetails Commit { get; set; } = new();
+        public string Html_Url { get; set; } = string.Empty;
+        public string Url => Html_Url;
+        public DateTime Date => Commit.Author.Date;
+        public string Message => Commit.Message;
+    }
+
+    private class CommitDetails
+    {
+        public string Message { get; set; } = string.Empty;
+        public AuthorInfo Author { get; set; } = new();
+    }
+
+    private class AuthorInfo
+    {
+        public DateTime Date { get; set; }
+    }
+
+}

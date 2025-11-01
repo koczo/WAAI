@@ -1,0 +1,30 @@
+@inject HttpClient Http
+@inject NavigationManager Navigation
+
+<a @onclick="@(() => Navigation.NavigateTo("/changelog"))"
+   class="text-xs opacity-50 cursor-pointer hover:opacity-100 transition">
+    v@_version
+</a>
+
+@code {
+    private string _version = "...";
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            var versionData = await Http.GetFromJsonAsync<VersionData>("version.json");
+            _version = versionData?.Version ?? "1.0.0";
+        }
+        catch
+        {
+            _version = "1.0.0";
+        }
+    }
+
+    private class VersionData
+    {
+        public string Version { get; set; } = string.Empty;
+    }
+
+}

@@ -23,8 +23,13 @@ if %errorlevel% neq 0 (
     exit /b 1
 )
 
+echo Creating version tag...
+for /f "tokens=2 delims=:, " %%a in ('findstr "version" version.json') do set VERSION=%%~a
+git tag -a v%VERSION% -m "Release v%VERSION%"
+
 echo Pushing to remote...
 git push origin master
+git push origin v%VERSION%
 if %errorlevel% neq 0 (
     echo FAILED: Push failed
     exit /b 1

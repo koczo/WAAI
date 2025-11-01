@@ -9,3 +9,4 @@ wwwroot/css/output.css
 .idea/
 package-lock.json
 /WAAI.sln.DotSettings.user
+!wwwroot/version.json
