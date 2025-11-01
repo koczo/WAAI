@@ -1,0 +1,95 @@
+@typeparam TStep where TStep : Enum
+@using Blazilla
+
+<Card>
+    @if (ShowStepper && StepperContent != null)
+    {
+        @StepperContent
+    }
+
+    <EditForm EditContext="_editContext" OnValidSubmit="NextStep">
+        <FluentValidator />
+        
+        @StepContent
+
+        <div class="flex @(IsFirstStep() ? "justify-end" : "justify-between") mt-8 pt-6 border-t border-gray-200">
+            <Button OnClick="PreviousStep" 
+                    Visible="@(!IsFirstStep())"
+                    Variant="Button.ButtonVariant.Secondary">
+                ← Previous
+            </Button>
+            
+            @if (!IsLastStep())
+            {
+                <Button Type="submit" Variant="Button.ButtonVariant.Primary">
+                    Next →
+                </Button>
+            }
+            else
+            {
+                <Button OnClick="OnComplete" Variant="Button.ButtonVariant.Success">
+                    @CompleteButtonText
+                </Button>
+            }
+        </div>
+    </EditForm>
+</Card>
+
+@code {
+    [Parameter] public TStep CurrentStep { get; set; } = default!;
+    [Parameter] public EventCallback<TStep> CurrentStepChanged { get; set; }
+    [Parameter] public RenderFragment? StepContent { get; set; }
+    [Parameter] public RenderFragment? StepperContent { get; set; }
+    [Parameter] public Func<TStep, object> GetModelForStep { get; set; } = null!;
+    [Parameter] public EventCallback OnComplete { get; set; }
+    [Parameter] public string CompleteButtonText { get; set; } = "Finish ✓";
+    [Parameter] public bool ShowStepper { get; set; } = true;
+
+    private EditContext _editContext = null!;
+
+    protected override void OnInitialized()
+    {
+        _editContext = new EditContext(GetModelForStep(CurrentStep));
+    }
+
+    protected override void OnParametersSet()
+    {
+        _editContext = new EditContext(GetModelForStep(CurrentStep));
+    }
+
+    private async Task NextStep()
+    {
+        var steps = Enum.GetValues(typeof(TStep)).Cast<TStep>().ToArray();
+        var currentIndex = Array.IndexOf(steps, CurrentStep);
+        if (currentIndex < steps.Length - 1)
+        {
+            CurrentStep = steps[currentIndex + 1];
+            await CurrentStepChanged.InvokeAsync(CurrentStep);
+            _editContext = new EditContext(GetModelForStep(CurrentStep));
+        }
+    }
+
+    private async Task PreviousStep()
+    {
+        var steps = Enum.GetValues(typeof(TStep)).Cast<TStep>().ToArray();
+        var currentIndex = Array.IndexOf(steps, CurrentStep);
+        if (currentIndex > 0)
+        {
+            CurrentStep = steps[currentIndex - 1];
+            await CurrentStepChanged.InvokeAsync(CurrentStep);
+            _editContext = new EditContext(GetModelForStep(CurrentStep));
+        }
+    }
+
+    private bool IsFirstStep()
+    {
+        var steps = Enum.GetValues(typeof(TStep)).Cast<TStep>().ToArray();
+        return Array.IndexOf(steps, CurrentStep) == 0;
+    }
+
+    private bool IsLastStep()
+    {
+        var steps = Enum.GetValues(typeof(TStep)).Cast<TStep>().ToArray();
+        return Array.IndexOf(steps, CurrentStep) == steps.Length - 1;
+    }
+}

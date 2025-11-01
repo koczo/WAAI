@@ -3,75 +3,61 @@
 @using WAAI.Features.Wizard.Steps.Account
 @using WAAI.Features.Wizard.Steps.Preferences
 @using WAAI.Features.Wizard.Steps.Complete
-@using FluentValidation
-@inject IValidator<PersonalInfo> PersonalValidator
-@inject IValidator<AccountInfo> AccountValidator
-@inject IValidator<PreferencesInfo> PreferencesValidator
+@using WAAI.Core.Components
 
 <PageTitle>Wizard</PageTitle>
 
 <div class="max-w-4xl mx-auto">
-    <h1 class="text-4xl font-bold text-gray-800 mb-8">Setup Wizard</h1>
+    <PageHeader Title="Setup Wizard" />
     
-    <div class="bg-white rounded-2xl shadow-xl p-8">
-        <WizardStepper CurrentStep="_currentStep" />
-
-        @switch (_currentStep)
-        {
-            case WizardStep.Personal:
-                <PersonalStep PersonalInfo="_personalInfo" />
-                break;
-            case WizardStep.Account:
-                <AccountStep AccountInfo="_accountInfo" />
-                break;
-            case WizardStep.Preferences:
-                <PreferencesStep PreferencesInfo="_preferencesInfo" />
-                break;
-            case WizardStep.Complete:
-                <CompleteStep PersonalInfo="_personalInfo" AccountInfo="_accountInfo" PreferencesInfo="_preferencesInfo" />
-                break;
-        }
-
-        <div class="flex justify-between mt-8 pt-6 border-t border-gray-200">
-            <button @onclick="PreviousStep" disabled="@(_currentStep == WizardStep.Personal)" class="@(_currentStep == WizardStep.Personal ? "bg-gray-300 cursor-not-allowed" : "bg-gray-600 hover:bg-gray-700") text-white px-6 py-3 rounded-lg font-semibold transition">
-                ← Previous
-            </button>
-            
-            @if (_currentStep < WizardStep.Complete)
+    <StepWizard TStep="WizardStep" 
+                CurrentStep="_currentStep" 
+                CurrentStepChanged="OnStepChanged"
+                GetModelForStep="GetCurrentModel"
+                OnComplete="Finish">
+        <StepperContent>
+            <WizardStepper CurrentStep="_currentStep" />
+        </StepperContent>
+        <StepContent>
+            @switch (_currentStep)
             {
-                <button @onclick="NextStep" disabled="@(!CanProceed())" class="@(CanProceed() ? "bg-indigo-600 hover:bg-indigo-700" : "bg-gray-300 cursor-not-allowed") text-white px-6 py-3 rounded-lg font-semibold transition">
-                    Next →
-                </button>
+                case WizardStep.Personal:
+                    <PersonalStep />
+                    break;
+                case WizardStep.Account:
+                    <AccountStep />
+                    break;
+                case WizardStep.Preferences:
+                    <PreferencesStep />
+                    break;
+                case WizardStep.Complete:
+                    <CompleteStep PersonalInfo="_personalInfo" AccountInfo="_accountInfo" PreferencesInfo="_preferencesInfo" />
+                    break;
             }
-            else
-            {
-                <button @onclick="Finish" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold transition">
-                    Finish ✓
-                </button>
-            }
-        </div>
-    </div>
+        </StepContent>
+    </StepWizard>
 </div>
 
 @code {
     private WizardStep _currentStep = WizardStep.Personal;
     
-    private readonly PersonalInfo _personalInfo = new();
-    private readonly AccountInfo _accountInfo = new();
-    private readonly PreferencesInfo _preferencesInfo = new();
+    private PersonalInfo _personalInfo = new();
+    private AccountInfo _accountInfo = new();
+    private PreferencesInfo _preferencesInfo = new();
 
-    private void NextStep() => _currentStep++;
-    private void PreviousStep() => _currentStep--;
+    private Task OnStepChanged(WizardStep newStep)
+    {
+        _currentStep = newStep;
+        return Task.CompletedTask;
+    }
+
     private void Finish() => _currentStep = WizardStep.Personal;
 
-    private bool CanProceed()
+    private object GetCurrentModel(WizardStep step) => step switch
     {
-        var result = _currentStep switch
-        {
-            WizardStep.Personal => PersonalValidator.Validate(_personalInfo),
-            WizardStep.Account => AccountValidator.Validate(_accountInfo),
-            _ => PreferencesValidator.Validate(_preferencesInfo)
-        };
-        return result.IsValid;
-    }
+        WizardStep.Personal => _personalInfo,
+        WizardStep.Account => _accountInfo,
+        WizardStep.Preferences => _preferencesInfo,
+        _ => new object()
+    };
 }

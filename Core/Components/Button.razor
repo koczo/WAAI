@@ -1,0 +1,30 @@
+@if (Visible)
+{
+    <button type="@Type" 
+            @onclick="OnClick" 
+            disabled="@Disabled" 
+            class="@GetButtonClass() text-white px-6 py-3 rounded-lg font-semibold transition">
+        @ChildContent
+    </button>
+}
+
+@code {
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+    [Parameter] public EventCallback OnClick { get; set; }
+    [Parameter] public bool Disabled { get; set; }
+    [Parameter] public bool Visible { get; set; } = true;
+    [Parameter] public string Type { get; set; } = "button";
+    [Parameter] public ButtonVariant Variant { get; set; } = ButtonVariant.Primary;
+
+    private string GetButtonClass() => Variant switch
+    {
+        ButtonVariant.Primary when Disabled => "bg-gray-300 cursor-not-allowed",
+        ButtonVariant.Primary => "bg-indigo-600 hover:bg-indigo-700",
+        ButtonVariant.Secondary when Disabled => "bg-gray-300 cursor-not-allowed",
+        ButtonVariant.Secondary => "bg-gray-600 hover:bg-gray-700",
+        ButtonVariant.Success => "bg-green-600 hover:bg-green-700",
+        _ => "bg-gray-600 hover:bg-gray-700"
+    };
+
+    public enum ButtonVariant { Primary, Secondary, Success }
+}
