@@ -8,29 +8,29 @@
 <PageTitle>User Onboarding</PageTitle>
 
 <div class="max-w-4xl mx-auto">
-    <PageHeader Title="User Onboarding" />
-    
-    <StepWizard TStep="OnboardingStep" 
-                CurrentStep="_currentStep" 
+    <PageHeader Title="User Onboarding"/>
+
+    <StepWizard TStep="OnboardingStep"
+                CurrentStep="_currentStep"
                 CurrentStepChanged="OnStepChanged"
                 Models="_models"
                 OnComplete="Finish">
         <StepContent>
             @if (_currentStep == OnboardingStep.Personal)
             {
-                <PersonalStep Model="_personalInfo" />
+                <PersonalStep Model="_personalInfo"/>
             }
             else if (_currentStep == OnboardingStep.Account)
             {
-                <AccountStep Model="_accountInfo" />
+                <AccountStep Model="_accountInfo"/>
             }
             else if (_currentStep == OnboardingStep.Preferences)
             {
-                <PreferencesStep Model="_preferencesInfo" />
+                <PreferencesStep Model="_preferencesInfo"/>
             }
             else if (_currentStep == OnboardingStep.Complete)
             {
-                <CompleteStep Summary="CreateSummary()" />
+                <CompleteStep Summary="CreateSummary()"/>
             }
         </StepContent>
     </StepWizard>

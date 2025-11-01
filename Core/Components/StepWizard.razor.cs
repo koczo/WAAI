@@ -7,6 +7,8 @@ namespace WAAI.Core.Components;
 
 public partial class StepWizard<TStep> where TStep : SmartEnum<TStep>
 {
+    private EditContext _editContext = null!;
+    private List<TStep> _steps = null!;
     [Parameter] public TStep CurrentStep { get; set; } = default!;
     [Parameter] public EventCallback<TStep> CurrentStepChanged { get; set; }
     [Parameter] public RenderFragment? StepContent { get; set; }
@@ -14,9 +16,6 @@ public partial class StepWizard<TStep> where TStep : SmartEnum<TStep>
     [Parameter] public EventCallback OnComplete { get; set; }
     [Parameter] public string CompleteButtonText { get; set; } = "Finish ✓";
     [Parameter] public bool ShowProgressStepper { get; set; } = true;
-
-    private EditContext _editContext = null!;
-    private List<TStep> _steps = null!;
 
     protected override void OnInitialized()
     {
@@ -29,15 +28,16 @@ public partial class StepWizard<TStep> where TStep : SmartEnum<TStep>
         _editContext = new EditContext(GetModelForStep(CurrentStep));
     }
 
-    private IStepModel GetModelForStep(TStep step) =>
-        Models.TryGetValue(step, out var model) ? model : throw new InvalidOperationException("Step does not exist");
+    private IStepModel GetModelForStep(TStep step)
+    {
+        return Models.TryGetValue(step, out var model)
+            ? model
+            : throw new InvalidOperationException("Step does not exist");
+    }
 
     private async Task HandleNext()
     {
-        if (_editContext.Validate())
-        {
-            await NextStep();
-        }
+        if (_editContext.Validate()) await NextStep();
     }
 
     private async Task NextStep()
@@ -62,7 +62,13 @@ public partial class StepWizard<TStep> where TStep : SmartEnum<TStep>
         }
     }
 
-    private bool IsFirstStep() => _steps.IndexOf(CurrentStep) == 0;
+    private bool IsFirstStep()
+    {
+        return _steps.IndexOf(CurrentStep) == 0;
+    }
 
-    private bool IsLastStep() => _steps.IndexOf(CurrentStep) == _steps.Count - 1;
+    private bool IsLastStep()
+    {
+        return _steps.IndexOf(CurrentStep) == _steps.Count - 1;
+    }
 }

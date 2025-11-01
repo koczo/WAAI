@@ -1,26 +1,24 @@
-@using Ardalis.SmartEnum
-@using WAAI.Core.Models
-@typeparam TStep where TStep : SmartEnum<TStep>
 @using Blazilla
+@typeparam TStep where TStep : Ardalis.SmartEnum.SmartEnum<TStep>
 
 <Card>
     @if (ShowProgressStepper)
     {
-        <ProgressStepper TStep="TStep" CurrentStep="CurrentStep" />
+        <ProgressStepper TStep="TStep" CurrentStep="CurrentStep"/>
     }
 
     <EditForm EditContext="_editContext" OnValidSubmit="NextStep">
-        <FluentValidator />
+        <FluentValidator/>
         @StepContent
     </EditForm>
 
     <div class="flex @(IsFirstStep() ? "justify-end" : "justify-between") mt-8 pt-6 border-t border-gray-200">
-        <Button OnClick="PreviousStep" 
+        <Button OnClick="PreviousStep"
                 Visible="@(!IsFirstStep())"
                 Variant="Button.ButtonVariant.Secondary">
             ← Previous
         </Button>
-        
+
         @if (!IsLastStep())
         {
             <Button OnClick="HandleNext" Variant="Button.ButtonVariant.Primary">
