@@ -1,7 +1,6 @@
 @echo off
 echo Formatting code and removing unused usings...
-dotnet format --verify-no-changes --verbosity diagnostic
-if %errorlevel% neq 0 dotnet format
+dotnet format WAAI.sln
 if %errorlevel% neq 0 (
     echo FAILED: Code formatting failed
     exit /b 1
