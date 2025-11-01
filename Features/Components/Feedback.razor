@@ -1,0 +1,91 @@
+@page "/components/feedback"
+
+<PageTitle>Feedback - daisyUI Components</PageTitle>
+
+<div class="max-w-7xl mx-auto space-y-8">
+    <h1 class="text-4xl font-bold mb-8">Feedback Components</h1>
+
+    <div class="card bg-base-100 shadow-xl">
+        <div class="card-body">
+            <h2 class="card-title">Alerts</h2>
+            <div class="space-y-4">
+                <div class="alert alert-info">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <span>New software update available.</span>
+                </div>
+                <div class="alert alert-success">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    <span>Your purchase has been confirmed!</span>
+                </div>
+                <div class="alert alert-warning">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                    <span>Warning: Invalid email address!</span>
+                </div>
+                <div class="alert alert-error">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    <span>Error! Task failed successfully.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card bg-base-100 shadow-xl">
+        <div class="card-body">
+            <h2 class="card-title">Loading</h2>
+            <div class="flex gap-4">
+                <span class="loading loading-spinner loading-xs"></span>
+                <span class="loading loading-spinner loading-sm"></span>
+                <span class="loading loading-spinner loading-md"></span>
+                <span class="loading loading-spinner loading-lg"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="card bg-base-100 shadow-xl">
+        <div class="card-body">
+            <h2 class="card-title">Progress</h2>
+            <div class="space-y-4">
+                <progress class="progress w-full" value="0" max="100"></progress>
+                <progress class="progress progress-primary w-full" value="25" max="100"></progress>
+                <progress class="progress progress-secondary w-full" value="50" max="100"></progress>
+                <progress class="progress progress-accent w-full" value="75" max="100"></progress>
+                <progress class="progress progress-success w-full" value="100" max="100"></progress>
+            </div>
+        </div>
+    </div>
+
+    <div class="card bg-base-100 shadow-xl">
+        <div class="card-body">
+            <h2 class="card-title">Radial Progress</h2>
+            <div class="flex gap-4">
+                <div class="radial-progress" style="--value:70;" role="progressbar">70%</div>
+                <div class="radial-progress text-primary" style="--value:70;" role="progressbar">70%</div>
+                <div class="radial-progress text-secondary" style="--value:70;" role="progressbar">70%</div>
+                <div class="radial-progress text-accent" style="--value:70;" role="progressbar">70%</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card bg-base-100 shadow-xl">
+        <div class="card-body">
+            <h2 class="card-title">Toast</h2>
+            <div class="toast toast-top toast-end">
+                <div class="alert alert-info">
+                    <span>New message arrived.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card bg-base-100 shadow-xl">
+        <div class="card-body">
+            <h2 class="card-title">Skeleton</h2>
+            <div class="flex w-52 flex-col gap-4">
+                <div class="skeleton h-32 w-full"></div>
+                <div class="skeleton h-4 w-28"></div>
+                <div class="skeleton h-4 w-full"></div>
+                <div class="skeleton h-4 w-full"></div>
+            </div>
+        </div>
+    </div>
+</div>
