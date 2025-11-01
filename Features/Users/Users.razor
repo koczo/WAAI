@@ -80,6 +80,6 @@
 
     protected override async Task OnInitializedAsync()
     {
-        _users = await LocalStorage.GetItemAsync<List<User>>("users") ?? new List<User>();
+        _users = await LocalStorage.GetItemAsync<List<User>>("users") ?? [];
     }
 }
