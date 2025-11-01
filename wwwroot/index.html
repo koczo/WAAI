@@ -12,17 +12,19 @@
 
 <body>
 <div id="app">
-    <svg class="loading-progress">
-        <circle cx="50%" cy="50%" r="40%"/>
-        <circle cx="50%" cy="50%" r="40%"/>
-    </svg>
-    <div class="loading-progress-text"></div>
+    <div class="flex flex-col items-center justify-center min-h-screen gap-4">
+        <span class="loading loading-spinner loading-lg text-primary"></span>
+        <p class="text-lg font-semibold">Loading...</p>
+    </div>
 </div>
 
-<div id="blazor-error-ui">
-    An unhandled error has occurred.
-    <a class="reload" href=".">Reload</a>
-    <span class="dismiss">🗙</span>
+<div id="blazor-error-ui" class="alert alert-error fixed bottom-0 left-0 right-0 rounded-none shadow-lg" style="display: none;">
+    <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+    <span>An unhandled error has occurred.</span>
+    <div class="flex gap-2">
+        <a href="." class="btn btn-sm btn-ghost">Reload</a>
+        <button class="btn btn-sm btn-circle btn-ghost dismiss">✕</button>
+    </div>
 </div>
 <script src="_framework/blazor.webassembly.js"></script>
 </body>
