@@ -1,12 +1,11 @@
 @import "tailwindcss";
 
 @theme {
-  --source: "../../**/*.razor", "../../**/*.html";
+    --source: "../../**/*.razor", "../../**/*.html";
 }
 
 @plugin "@tailwindcss/forms";
 @plugin "@tailwindcss/typography";
-
 
 
 html, body {
