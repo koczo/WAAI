@@ -17,6 +17,7 @@ public partial class UserOnboarding
     private readonly Dictionary<OnboardingStep, IStepModel> _models;
     private readonly PersonalInfo _personalInfo = new();
     private readonly PreferencesInfo _preferencesInfo = new();
+    private CompleteSummary _completeSummary = new();
     private OnboardingStep _currentStep = OnboardingStep.Personal;
 
     public UserOnboarding()
@@ -25,13 +26,18 @@ public partial class UserOnboarding
         {
             [OnboardingStep.Personal] = _personalInfo,
             [OnboardingStep.Account] = _accountInfo,
-            [OnboardingStep.Preferences] = _preferencesInfo
+            [OnboardingStep.Preferences] = _preferencesInfo,
+            [OnboardingStep.Complete] = _completeSummary
         };
     }
 
     private Task OnStepChanged(OnboardingStep newStep)
     {
         _currentStep = newStep;
+        if (_currentStep == OnboardingStep.Complete)
+        {
+            CreateSummary();
+        }
         return Task.CompletedTask;
     }
 
@@ -49,22 +55,19 @@ public partial class UserOnboarding
             CreatedAt = DateTime.UtcNow
         };
 
-        var users = await LocalStorage.GetItemAsync<List<User>>("users") ?? new List<User>();
+        var users = await LocalStorage.GetItemAsync<List<User>>("users") ?? [];
         users.Add(user);
         await LocalStorage.SetItemAsync("users", users);
 
         Navigation.NavigateTo("/users");
     }
 
-    private CompleteSummary CreateSummary()
+    private void CreateSummary()
     {
-        return new CompleteSummary
-        {
-            FullName = _personalInfo.FullName,
-            Email = _personalInfo.Email,
-            Username = _accountInfo.Username,
-            Language = _preferencesInfo.Language,
-            Theme = _preferencesInfo.Theme
-        };
+        _completeSummary.FullName = _personalInfo.FullName;
+        _completeSummary.Email = _personalInfo.Email;
+        _completeSummary.Username = _accountInfo.Username;
+        _completeSummary.Language = _preferencesInfo.Language;
+        _completeSummary.Theme = _preferencesInfo.Theme;
     }
 }
