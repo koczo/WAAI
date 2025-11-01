@@ -1,3 +1,5 @@
+using Blazored.LocalStorage;
+using Microsoft.AspNetCore.Components;
 using WAAI.Core.Models;
 using WAAI.Features.UserOnboarding.Steps.Account;
 using WAAI.Features.UserOnboarding.Steps.Complete;
@@ -8,6 +10,9 @@ namespace WAAI.Features.UserOnboarding;
 
 public partial class UserOnboarding
 {
+    [Inject] private ILocalStorageService LocalStorage { get; set; } = default!;
+    [Inject] private NavigationManager Navigation { get; set; } = default!;
+
     private readonly AccountInfo _accountInfo = new();
     private readonly Dictionary<OnboardingStep, IStepModel> _models;
     private readonly PersonalInfo _personalInfo = new();
@@ -30,9 +35,25 @@ public partial class UserOnboarding
         return Task.CompletedTask;
     }
 
-    private void Finish()
+    private async Task Finish()
     {
-        _currentStep = OnboardingStep.Personal;
+        var user = new User
+        {
+            FullName = _personalInfo.FullName,
+            Email = _personalInfo.Email,
+            Phone = _personalInfo.Phone,
+            Username = _accountInfo.Username,
+            Language = _preferencesInfo.Language,
+            Theme = _preferencesInfo.Theme,
+            Newsletter = _preferencesInfo.Newsletter,
+            CreatedAt = DateTime.UtcNow
+        };
+
+        var users = await LocalStorage.GetItemAsync<List<User>>("users") ?? new List<User>();
+        users.Add(user);
+        await LocalStorage.SetItemAsync("users", users);
+
+        Navigation.NavigateTo("/users");
     }
 
     private CompleteSummary CreateSummary()
