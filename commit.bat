@@ -1,7 +1,8 @@
 @echo off
 setlocal enabledelayedexpansion
+
 echo Incrementing version...
-for /f "tokens=2 delims=:, " %%a in ('findstr "version" version.json') do set OLD_VERSION=%%~a
+for /f "delims=" %%i in ('powershell -Command "(Get-Content version.json | ConvertFrom-Json).version"') do set OLD_VERSION=%%i
 for /f "tokens=1,2,3 delims=." %%a in ("!OLD_VERSION!") do (
     set MAJOR=%%a
     set MINOR=%%b
