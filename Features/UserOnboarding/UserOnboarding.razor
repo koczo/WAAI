@@ -1,0 +1,61 @@
+@page "/onboarding"
+@using WAAI.Features.UserOnboarding.Steps.Personal
+@using WAAI.Features.UserOnboarding.Steps.Account
+@using WAAI.Features.UserOnboarding.Steps.Preferences
+@using WAAI.Features.UserOnboarding.Steps.Complete
+@using WAAI.Core.Components
+
+<PageTitle>User Onboarding</PageTitle>
+
+<div class="max-w-4xl mx-auto">
+    <PageHeader Title="User Onboarding" />
+    
+    <StepWizard TStep="OnboardingStep" 
+                CurrentStep="_currentStep" 
+                CurrentStepChanged="OnStepChanged"
+                GetModelForStep="GetCurrentModel"
+                OnComplete="Finish">
+        <StepContent>
+            @if (_currentStep == OnboardingStep.Personal)
+            {
+                <PersonalStep />
+            }
+            else if (_currentStep == OnboardingStep.Account)
+            {
+                <AccountStep />
+            }
+            else if (_currentStep == OnboardingStep.Preferences)
+            {
+                <PreferencesStep />
+            }
+            else if (_currentStep == OnboardingStep.Complete)
+            {
+                <CompleteStep PersonalInfo="_personalInfo" AccountInfo="_accountInfo" PreferencesInfo="_preferencesInfo" />
+            }
+        </StepContent>
+    </StepWizard>
+</div>
+
+@code {
+    private OnboardingStep _currentStep = OnboardingStep.Personal;
+    
+    private PersonalInfo _personalInfo = new();
+    private AccountInfo _accountInfo = new();
+    private PreferencesInfo _preferencesInfo = new();
+
+    private Task OnStepChanged(OnboardingStep newStep)
+    {
+        _currentStep = newStep;
+        return Task.CompletedTask;
+    }
+
+    private void Finish() => _currentStep = OnboardingStep.Personal;
+
+    private object GetCurrentModel(OnboardingStep step)
+    {
+        if (step == OnboardingStep.Personal) return _personalInfo;
+        if (step == OnboardingStep.Account) return _accountInfo;
+        if (step == OnboardingStep.Preferences) return _preferencesInfo;
+        return new object();
+    }
+}

@@ -1,10 +1,11 @@
-@typeparam TStep where TStep : Enum
+@using Ardalis.SmartEnum
+@typeparam TStep where TStep : SmartEnum<TStep>
 @using Blazilla
 
 <Card>
-    @if (ShowStepper && StepperContent != null)
+    @if (ShowProgressStepper)
     {
-        @StepperContent
+        <ProgressStepper TStep="TStep" CurrentStep="CurrentStep" />
     }
 
     <EditForm EditContext="_editContext" OnValidSubmit="NextStep">
@@ -39,11 +40,10 @@
     [Parameter] public TStep CurrentStep { get; set; } = default!;
     [Parameter] public EventCallback<TStep> CurrentStepChanged { get; set; }
     [Parameter] public RenderFragment? StepContent { get; set; }
-    [Parameter] public RenderFragment? StepperContent { get; set; }
     [Parameter] public Func<TStep, object> GetModelForStep { get; set; } = null!;
     [Parameter] public EventCallback OnComplete { get; set; }
     [Parameter] public string CompleteButtonText { get; set; } = "Finish ✓";
-    [Parameter] public bool ShowStepper { get; set; } = true;
+    [Parameter] public bool ShowProgressStepper { get; set; } = true;
 
     private EditContext _editContext = null!;
 
@@ -59,7 +59,7 @@
 
     private async Task NextStep()
     {
-        var steps = Enum.GetValues(typeof(TStep)).Cast<TStep>().ToArray();
+        var steps = SmartEnum<TStep>.List.ToArray();
         var currentIndex = Array.IndexOf(steps, CurrentStep);
         if (currentIndex < steps.Length - 1)
         {
@@ -71,7 +71,7 @@
 
     private async Task PreviousStep()
     {
-        var steps = Enum.GetValues(typeof(TStep)).Cast<TStep>().ToArray();
+        var steps = SmartEnum<TStep>.List.ToArray();
         var currentIndex = Array.IndexOf(steps, CurrentStep);
         if (currentIndex > 0)
         {
@@ -83,13 +83,13 @@
 
     private bool IsFirstStep()
     {
-        var steps = Enum.GetValues(typeof(TStep)).Cast<TStep>().ToArray();
+        var steps = SmartEnum<TStep>.List.ToArray();
         return Array.IndexOf(steps, CurrentStep) == 0;
     }
 
     private bool IsLastStep()
     {
-        var steps = Enum.GetValues(typeof(TStep)).Cast<TStep>().ToArray();
+        var steps = SmartEnum<TStep>.List.ToArray();
         return Array.IndexOf(steps, CurrentStep) == steps.Length - 1;
     }
 }

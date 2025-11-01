@@ -1,6 +1,6 @@
 using FluentValidation;
 
-namespace WAAI.Features.Wizard.Steps.Account;
+namespace WAAI.Features.UserOnboarding.Steps.Account;
 
 public class AccountInfoValidator : AbstractValidator<AccountInfo>
 {

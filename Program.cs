@@ -2,9 +2,9 @@ using FluentValidation;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using WAAI;
-using WAAI.Features.Wizard.Steps.Personal;
-using WAAI.Features.Wizard.Steps.Account;
-using WAAI.Features.Wizard.Steps.Preferences;
+using WAAI.Features.UserOnboarding.Steps.Personal;
+using WAAI.Features.UserOnboarding.Steps.Account;
+using WAAI.Features.UserOnboarding.Steps.Preferences;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");

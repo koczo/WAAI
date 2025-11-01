@@ -1,6 +1,6 @@
 using FluentValidation;
 
-namespace WAAI.Features.Wizard.Steps.Preferences;
+namespace WAAI.Features.UserOnboarding.Steps.Preferences;
 
 public class PreferencesInfoValidator : AbstractValidator<PreferencesInfo>
 {

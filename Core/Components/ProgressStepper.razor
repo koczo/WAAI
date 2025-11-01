@@ -1,0 +1,33 @@
+@using Ardalis.SmartEnum
+@typeparam TStep where TStep : SmartEnum<TStep>
+
+<div class="flex items-center justify-between mb-8">
+    <div class="flex items-center gap-4 flex-1">
+        @foreach (var step in SmartEnum<TStep>.List.OrderBy(s => s.Value))
+        {
+            <div class="flex items-center gap-2">
+                <div class="@GetStepClass(step)">@step.Value</div>
+                <span class="@GetStepTextClass(step)">@step.Name</span>
+            </div>
+            @if (step.Value < SmartEnum<TStep>.List.Max(s => s.Value))
+            {
+                <div class="flex-1 h-1 @GetLineClass(step)"></div>
+            }
+        }
+    </div>
+</div>
+
+@code {
+    [Parameter] public required TStep CurrentStep { get; set; }
+
+    private string GetStepClass(TStep step) =>
+        CurrentStep >= step
+            ? "w-10 h-10 rounded-full bg-indigo-600 text-white flex items-center justify-center font-bold"
+            : "w-10 h-10 rounded-full bg-gray-300 text-gray-600 flex items-center justify-center font-bold";
+
+    private string GetStepTextClass(TStep step) =>
+        CurrentStep >= step ? "font-semibold text-indigo-600" : "text-gray-500";
+
+    private string GetLineClass(TStep step) =>
+        CurrentStep > step ? "bg-indigo-600" : "bg-gray-300";
+}

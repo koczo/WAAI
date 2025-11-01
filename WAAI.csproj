@@ -7,6 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Ardalis.SmartEnum" Version="8.2.0" />
         <PackageReference Include="Blazilla" Version="1.1.0" />
         <PackageReference Include="FluentValidation" Version="12.0.0" />
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="9.0.10" />

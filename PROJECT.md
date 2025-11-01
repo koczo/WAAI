@@ -6,9 +6,10 @@
 ```
 WAAI/
 ├── Features/
-│   └── Wizard/
-│       ├── Wizard.razor                 # Główna strona wizarda
-│       ├── WizardStep.cs                # Enum kroków
+│   └── UserOnboarding/
+│       ├── UserOnboarding.razor         # Główna strona onboardingu
+│       ├── OnboardingStep.cs            # SmartEnum kroków
+│       ├── OnboardingStepper.razor      # Stepper UI
 │       └── Steps/
 │           ├── Personal/
 │           │   ├── PersonalStep.razor
@@ -37,7 +38,7 @@ WAAI/
 
 ### StepWizard.razor
 Generyczny komponent wizarda z:
-- `TStep` - enum definiujący kroki
+- `TStep` - SmartEnum definiujący kroki
 - `EditForm` + `FluentValidator` - walidacja
 - Automatyczna nawigacja Next/Previous
 - `OnStepChanged` callback
@@ -45,11 +46,11 @@ Generyczny komponent wizarda z:
 
 **Użycie:**
 ```razor
-<StepWizard TStep="WizardStep" 
+<StepWizard TStep="OnboardingStep" 
             CurrentStep="@currentStep"
             OnStepChanged="HandleStepChanged"
             OnCompleted="HandleCompleted">
-    @if (currentStep == WizardStep.Personal)
+    @if (currentStep == OnboardingStep.Personal)
     {
         <PersonalStep @bind-Model="personalInfo" />
     }

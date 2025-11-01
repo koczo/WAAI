@@ -1,6 +1,6 @@
 using FluentValidation;
 
-namespace WAAI.Features.Wizard.Steps.Personal;
+namespace WAAI.Features.UserOnboarding.Steps.Personal;
 
 public class PersonalInfoValidator : AbstractValidator<PersonalInfo>
 {
