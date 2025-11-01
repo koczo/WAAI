@@ -1,7 +1,9 @@
 @page "/users"
 @using Blazored.LocalStorage
 @using WAAI.Core.Models
+@using Microsoft.AspNetCore.Components
 @inject ILocalStorageService LocalStorage
+@inject NavigationManager Navigation
 
 <PageTitle>Onboarded Users</PageTitle>
 
@@ -74,6 +76,10 @@
         </div>
     }
 </div>
+
+<button class="btn btn-circle btn-primary fixed bottom-8 right-8 w-16 h-16" @onclick="@(() => Navigation.NavigateTo("/onboarding"))">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+</button>
 
 @code {
     private List<User>? _users;
