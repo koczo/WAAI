@@ -4,90 +4,83 @@
 
 <div class="max-w-7xl mx-auto">
     <div class="flex justify-between items-center mb-8">
-        <h1 class="text-4xl font-bold text-gray-800">Shop</h1>
+        <h1 class="text-4xl font-bold">Shop</h1>
         <div class="flex gap-4">
-            <button class="bg-white border-2 border-gray-200 px-4 py-2 rounded-lg hover:border-indigo-500 transition">🔍
-                Search
-            </button>
-            <button
-                class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg font-semibold transition relative">
-                🛒 Cart
-                <span
-                    class="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-6 h-6 rounded-full flex items-center justify-center">3</span>
-            </button>
+            <button class="btn btn-outline">🔍 Search</button>
+            <div class="indicator">
+                <span class="indicator-item badge badge-error">3</span>
+                <button class="btn btn-primary">🛒 Cart</button>
+            </div>
         </div>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 group">
-            <div class="relative">
-                <div class="h-64 bg-gradient-to-br from-blue-400 to-blue-600"></div>
-                <span
-                    class="absolute top-4 right-4 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-bold">-20%</span>
-            </div>
-            <div class="p-4">
-                <h3 class="font-bold text-gray-800 mb-2">Premium Headphones</h3>
-                <p class="text-sm text-gray-500 mb-3">Wireless, Noise Cancelling</p>
-                <div class="flex items-center justify-between">
+        <div class="card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow">
+            <figure class="relative h-64 bg-gradient-to-br from-blue-400 to-blue-600">
+                <div class="badge badge-error absolute top-4 right-4">-20%</div>
+            </figure>
+            <div class="card-body">
+                <h3 class="card-title">Premium Headphones</h3>
+                <p class="text-sm opacity-60">Wireless, Noise Cancelling</p>
+                <div class="card-actions justify-between items-center">
                     <div>
-                        <span class="text-gray-400 line-through text-sm">$299</span>
-                        <span class="text-2xl font-bold text-gray-800 ml-2">$239</span>
+                        <span class="line-through text-sm opacity-60">$299</span>
+                        <span class="text-2xl font-bold ml-2">$239</span>
                     </div>
-                    <button class="bg-indigo-600 hover:bg-indigo-700 text-white p-2 rounded-lg transition">🛒</button>
+                    <button class="btn btn-primary btn-sm">🛒</button>
                 </div>
             </div>
         </div>
 
-        <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 group">
-            <div class="h-64 bg-gradient-to-br from-purple-400 to-pink-600"></div>
-            <div class="p-4">
-                <h3 class="font-bold text-gray-800 mb-2">Smart Watch Pro</h3>
-                <p class="text-sm text-gray-500 mb-3">Fitness Tracker, GPS</p>
-                <div class="flex items-center justify-between">
-                    <span class="text-2xl font-bold text-gray-800">$399</span>
-                    <button class="bg-indigo-600 hover:bg-indigo-700 text-white p-2 rounded-lg transition">🛒</button>
+        <div class="card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow">
+            <figure class="h-64 bg-gradient-to-br from-purple-400 to-pink-600"></figure>
+            <div class="card-body">
+                <h3 class="card-title">Smart Watch Pro</h3>
+                <p class="text-sm opacity-60">Fitness Tracker, GPS</p>
+                <div class="card-actions justify-between items-center">
+                    <span class="text-2xl font-bold">$399</span>
+                    <button class="btn btn-primary btn-sm">🛒</button>
                 </div>
             </div>
         </div>
 
-        <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 group">
-            <div class="relative">
-                <div class="h-64 bg-gradient-to-br from-green-400 to-teal-600"></div>
-                <span class="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-bold">NEW</span>
-            </div>
-            <div class="p-4">
-                <h3 class="font-bold text-gray-800 mb-2">Laptop Stand</h3>
-                <p class="text-sm text-gray-500 mb-3">Aluminum, Adjustable</p>
-                <div class="flex items-center justify-between">
-                    <span class="text-2xl font-bold text-gray-800">$49</span>
-                    <button class="bg-indigo-600 hover:bg-indigo-700 text-white p-2 rounded-lg transition">🛒</button>
+        <div class="card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow">
+            <figure class="relative h-64 bg-gradient-to-br from-green-400 to-teal-600">
+                <div class="badge badge-success absolute top-4 right-4">NEW</div>
+            </figure>
+            <div class="card-body">
+                <h3 class="card-title">Laptop Stand</h3>
+                <p class="text-sm opacity-60">Aluminum, Adjustable</p>
+                <div class="card-actions justify-between items-center">
+                    <span class="text-2xl font-bold">$49</span>
+                    <button class="btn btn-primary btn-sm">🛒</button>
                 </div>
             </div>
         </div>
 
-        <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 group">
-            <div class="h-64 bg-gradient-to-br from-orange-400 to-red-600"></div>
-            <div class="p-4">
-                <h3 class="font-bold text-gray-800 mb-2">Wireless Mouse</h3>
-                <p class="text-sm text-gray-500 mb-3">Ergonomic, Rechargeable</p>
-                <div class="flex items-center justify-between">
-                    <span class="text-2xl font-bold text-gray-800">$79</span>
-                    <button class="bg-indigo-600 hover:bg-indigo-700 text-white p-2 rounded-lg transition">🛒</button>
+        <div class="card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow">
+            <figure class="h-64 bg-gradient-to-br from-orange-400 to-red-600"></figure>
+            <div class="card-body">
+                <h3 class="card-title">Wireless Mouse</h3>
+                <p class="text-sm opacity-60">Ergonomic, Rechargeable</p>
+                <div class="card-actions justify-between items-center">
+                    <span class="text-2xl font-bold">$79</span>
+                    <button class="btn btn-primary btn-sm">🛒</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl shadow-xl p-8 text-white">
-        <div class="flex flex-col md:flex-row items-center justify-between gap-6">
-            <div>
-                <h2 class="text-3xl font-bold mb-2">Special Offer!</h2>
-                <p class="text-indigo-100 mb-4">Get 30% off on all electronics this week</p>
-                <button class="bg-white text-indigo-600 px-6 py-3 rounded-lg font-bold hover:bg-indigo-50 transition">
-                    Shop Now
-                </button>
+    <div class="card bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-xl">
+        <div class="card-body">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                <div>
+                    <h2 class="card-title text-3xl mb-2">Special Offer!</h2>
+                    <p class="opacity-90 mb-4">Get 30% off on all electronics this week</p>
+                    <button class="btn btn-neutral">Shop Now</button>
+                </div>
+                <div class="text-6xl">🎁</div>
             </div>
-            <div class="text-6xl">🎁</div>
         </div>
     </div>
 </div>

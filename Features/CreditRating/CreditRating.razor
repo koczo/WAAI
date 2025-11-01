@@ -3,122 +3,124 @@
 <PageTitle>Credit Rating</PageTitle>
 
 <div class="max-w-7xl mx-auto">
-    <h1 class="text-4xl font-bold text-gray-800 mb-8">Credit Rating Analysis</h1>
+    <h1 class="text-4xl font-bold mb-8">Credit Rating Analysis</h1>
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-        <div class="bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl shadow-xl p-8 text-white">
-            <div class="flex justify-between items-start mb-6">
-                <div>
-                    <p class="text-green-100 text-sm mb-2">Credit Score</p>
-                    <p class="text-6xl font-bold">780</p>
+        <div class="card bg-gradient-to-br from-green-500 to-emerald-600 text-white shadow-xl">
+            <div class="card-body">
+                <div class="flex justify-between items-start mb-6">
+                    <div>
+                        <p class="text-sm opacity-80 mb-2">Credit Score</p>
+                        <p class="text-6xl font-bold">780</p>
+                    </div>
+                    <div class="badge badge-outline badge-lg">Excellent</div>
                 </div>
-                <div class="bg-white/20 px-4 py-2 rounded-full">
-                    <p class="text-sm font-bold">Excellent</p>
-                </div>
-            </div>
-            <div class="w-full bg-white/20 rounded-full h-3 mb-2">
-                <div class="bg-white rounded-full h-3" style="width: 78%"></div>
-            </div>
-            <p class="text-green-100 text-sm">Above average by 15%</p>
-        </div>
-
-        <div class="bg-white rounded-2xl shadow-lg p-6 border-2 border-gray-200">
-            <div class="flex items-center gap-3 mb-4">
-                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-2xl">📊</div>
-                <div>
-                    <p class="text-sm text-gray-500">Payment History</p>
-                    <p class="text-2xl font-bold text-gray-800">100%</p>
-                </div>
-            </div>
-            <div class="flex items-center gap-2 text-sm text-green-600">
-                <span class="bg-green-100 px-2 py-1 rounded">✓ On Time</span>
+                <progress class="progress progress-success bg-white/20 mb-2" value="78" max="100"></progress>
+                <p class="text-sm opacity-80">Above average by 15%</p>
             </div>
         </div>
 
-        <div class="bg-white rounded-2xl shadow-lg p-6 border-2 border-gray-200">
-            <div class="flex items-center gap-3 mb-4">
-                <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center text-2xl">💳</div>
-                <div>
-                    <p class="text-sm text-gray-500">Credit Utilization</p>
-                    <p class="text-2xl font-bold text-gray-800">23%</p>
+        <div class="card bg-base-100 shadow-xl border-2">
+            <div class="card-body">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="avatar placeholder">
+                        <div class="bg-info text-info-content rounded-full w-12">
+                            <span class="text-2xl">📊</span>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="text-sm opacity-60">Payment History</p>
+                        <p class="text-2xl font-bold">100%</p>
+                    </div>
                 </div>
+                <div class="badge badge-success gap-2">✓ On Time</div>
             </div>
-            <div class="flex items-center gap-2 text-sm text-green-600">
-                <span class="bg-green-100 px-2 py-1 rounded">✓ Good</span>
+        </div>
+
+        <div class="card bg-base-100 shadow-xl border-2">
+            <div class="card-body">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="avatar placeholder">
+                        <div class="bg-secondary text-secondary-content rounded-full w-12">
+                            <span class="text-2xl">💳</span>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="text-sm opacity-60">Credit Utilization</p>
+                        <p class="text-2xl font-bold">23%</p>
+                    </div>
+                </div>
+                <div class="badge badge-success gap-2">✓ Good</div>
             </div>
         </div>
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div class="bg-white rounded-2xl shadow-lg p-6">
-            <h2 class="text-xl font-bold text-gray-800 mb-6">Rating Breakdown</h2>
-            <div class="space-y-4">
-                <div>
-                    <div class="flex justify-between mb-2">
-                        <span class="text-gray-700 font-medium">Payment History</span>
-                        <span class="text-green-600 font-bold">35%</span>
+        <div class="card bg-base-100 shadow-xl">
+            <div class="card-body">
+                <h2 class="card-title">Rating Breakdown</h2>
+                <div class="space-y-4">
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium">Payment History</span>
+                            <span class="text-success font-bold">35%</span>
+                        </div>
+                        <progress class="progress progress-success" value="100" max="100"></progress>
                     </div>
-                    <div class="w-full bg-gray-200 rounded-full h-3">
-                        <div class="bg-green-500 rounded-full h-3" style="width: 100%"></div>
-                    </div>
-                </div>
 
-                <div>
-                    <div class="flex justify-between mb-2">
-                        <span class="text-gray-700 font-medium">Credit Utilization</span>
-                        <span class="text-green-600 font-bold">30%</span>
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium">Credit Utilization</span>
+                            <span class="text-success font-bold">30%</span>
+                        </div>
+                        <progress class="progress progress-success" value="85" max="100"></progress>
                     </div>
-                    <div class="w-full bg-gray-200 rounded-full h-3">
-                        <div class="bg-green-500 rounded-full h-3" style="width: 85%"></div>
-                    </div>
-                </div>
 
-                <div>
-                    <div class="flex justify-between mb-2">
-                        <span class="text-gray-700 font-medium">Credit History Length</span>
-                        <span class="text-blue-600 font-bold">15%</span>
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium">Credit History Length</span>
+                            <span class="text-info font-bold">15%</span>
+                        </div>
+                        <progress class="progress progress-info" value="70" max="100"></progress>
                     </div>
-                    <div class="w-full bg-gray-200 rounded-full h-3">
-                        <div class="bg-blue-500 rounded-full h-3" style="width: 70%"></div>
-                    </div>
-                </div>
 
-                <div>
-                    <div class="flex justify-between mb-2">
-                        <span class="text-gray-700 font-medium">Credit Mix</span>
-                        <span class="text-yellow-600 font-bold">10%</span>
-                    </div>
-                    <div class="w-full bg-gray-200 rounded-full h-3">
-                        <div class="bg-yellow-500 rounded-full h-3" style="width: 60%"></div>
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium">Credit Mix</span>
+                            <span class="text-warning font-bold">10%</span>
+                        </div>
+                        <progress class="progress progress-warning" value="60" max="100"></progress>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="bg-white rounded-2xl shadow-lg p-6">
-            <h2 class="text-xl font-bold text-gray-800 mb-6">Recommendations</h2>
-            <div class="space-y-4">
-                <div class="flex gap-4 p-4 bg-green-50 rounded-xl border border-green-200">
-                    <div class="text-2xl">✅</div>
-                    <div>
-                        <p class="font-semibold text-gray-800 mb-1">Keep up the good work!</p>
-                        <p class="text-sm text-gray-600">Your payment history is excellent</p>
+        <div class="card bg-base-100 shadow-xl">
+            <div class="card-body">
+                <h2 class="card-title">Recommendations</h2>
+                <div class="space-y-4">
+                    <div class="alert alert-success">
+                        <span class="text-2xl">✅</span>
+                        <div>
+                            <p class="font-semibold">Keep up the good work!</p>
+                            <p class="text-sm">Your payment history is excellent</p>
+                        </div>
                     </div>
-                </div>
 
-                <div class="flex gap-4 p-4 bg-blue-50 rounded-xl border border-blue-200">
-                    <div class="text-2xl">💡</div>
-                    <div>
-                        <p class="font-semibold text-gray-800 mb-1">Diversify credit types</p>
-                        <p class="text-sm text-gray-600">Consider adding different credit accounts</p>
+                    <div class="alert alert-info">
+                        <span class="text-2xl">💡</span>
+                        <div>
+                            <p class="font-semibold">Diversify credit types</p>
+                            <p class="text-sm">Consider adding different credit accounts</p>
+                        </div>
                     </div>
-                </div>
 
-                <div class="flex gap-4 p-4 bg-purple-50 rounded-xl border border-purple-200">
-                    <div class="text-2xl">📈</div>
-                    <div>
-                        <p class="font-semibold text-gray-800 mb-1">Potential to reach 800+</p>
-                        <p class="text-sm text-gray-600">Continue current habits for 6 months</p>
+                    <div class="alert">
+                        <span class="text-2xl">📈</span>
+                        <div>
+                            <p class="font-semibold">Potential to reach 800+</p>
+                            <p class="text-sm">Continue current habits for 6 months</p>
+                        </div>
                     </div>
                 </div>
             </div>

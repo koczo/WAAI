@@ -20,11 +20,4 @@ public partial class PreferencesStep
     {
         Model.Theme = "auto";
     }
-
-    private string GetThemeButtonClass(string themeValue)
-    {
-        return Model.Theme == themeValue
-            ? "border-2 border-indigo-600 bg-indigo-50"
-            : "border-2 border-gray-300";
-    }
 }

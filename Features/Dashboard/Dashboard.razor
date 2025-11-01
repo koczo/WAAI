@@ -3,94 +3,93 @@
 <PageTitle>Dashboard</PageTitle>
 
 <div class="max-w-7xl mx-auto">
-    <h1 class="text-4xl font-bold text-gray-800 mb-8">Dashboard</h1>
+    <h1 class="text-4xl font-bold mb-8">Dashboard</h1>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        <div class="bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl shadow-lg p-6 text-white">
-            <div class="flex justify-between items-start mb-4">
-                <div class="text-3xl">👥</div>
-                <span class="bg-white/20 px-2 py-1 rounded text-xs">+12%</span>
-            </div>
-            <p class="text-blue-100 text-sm mb-1">Total Users</p>
-            <p class="text-3xl font-bold">2,543</p>
+    <div class="stats stats-vertical lg:stats-horizontal shadow mb-8 w-full">
+        <div class="stat bg-gradient-to-br from-blue-500 to-blue-600 text-white">
+            <div class="stat-figure text-3xl">👥</div>
+            <div class="stat-title text-blue-100">Total Users</div>
+            <div class="stat-value">2,543</div>
+            <div class="stat-desc text-blue-100">+12% from last month</div>
         </div>
 
-        <div class="bg-gradient-to-br from-green-500 to-green-600 rounded-xl shadow-lg p-6 text-white">
-            <div class="flex justify-between items-start mb-4">
-                <div class="text-3xl">💰</div>
-                <span class="bg-white/20 px-2 py-1 rounded text-xs">+8%</span>
-            </div>
-            <p class="text-green-100 text-sm mb-1">Revenue</p>
-            <p class="text-3xl font-bold">$45.2K</p>
+        <div class="stat bg-gradient-to-br from-green-500 to-green-600 text-white">
+            <div class="stat-figure text-3xl">💰</div>
+            <div class="stat-title text-green-100">Revenue</div>
+            <div class="stat-value">$45.2K</div>
+            <div class="stat-desc text-green-100">+8% from last month</div>
         </div>
 
-        <div class="bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl shadow-lg p-6 text-white">
-            <div class="flex justify-between items-start mb-4">
-                <div class="text-3xl">📦</div>
-                <span class="bg-white/20 px-2 py-1 rounded text-xs">+23%</span>
-            </div>
-            <p class="text-purple-100 text-sm mb-1">Orders</p>
-            <p class="text-3xl font-bold">1,234</p>
+        <div class="stat bg-gradient-to-br from-purple-500 to-purple-600 text-white">
+            <div class="stat-figure text-3xl">📦</div>
+            <div class="stat-title text-purple-100">Orders</div>
+            <div class="stat-value">1,234</div>
+            <div class="stat-desc text-purple-100">+23% from last month</div>
         </div>
 
-        <div class="bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl shadow-lg p-6 text-white">
-            <div class="flex justify-between items-start mb-4">
-                <div class="text-3xl">⭐</div>
-                <span class="bg-white/20 px-2 py-1 rounded text-xs">+5%</span>
-            </div>
-            <p class="text-orange-100 text-sm mb-1">Rating</p>
-            <p class="text-3xl font-bold">4.8</p>
+        <div class="stat bg-gradient-to-br from-orange-500 to-orange-600 text-white">
+            <div class="stat-figure text-3xl">⭐</div>
+            <div class="stat-title text-orange-100">Rating</div>
+            <div class="stat-value">4.8</div>
+            <div class="stat-desc text-orange-100">+5% from last month</div>
         </div>
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div class="lg:col-span-2 bg-white rounded-xl shadow-lg p-6">
-            <h2 class="text-xl font-bold text-gray-800 mb-4">Recent Activity</h2>
-            <div class="space-y-4">
-                <div class="flex items-center gap-4 p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
-                    <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">👤</div>
-                    <div class="flex-1">
-                        <p class="font-semibold text-gray-800">New user registered</p>
-                        <p class="text-sm text-gray-500">2 minutes ago</p>
+        <div class="lg:col-span-2 card bg-base-100 shadow-xl">
+            <div class="card-body">
+                <h2 class="card-title">Recent Activity</h2>
+                <div class="space-y-4">
+                    <div class="flex items-center gap-4 p-4 bg-base-200 rounded-lg hover:bg-base-300 transition">
+                        <div class="avatar placeholder">
+                            <div class="bg-primary text-primary-content rounded-full w-10">
+                                <span>👤</span>
+                            </div>
+                        </div>
+                        <div class="flex-1">
+                            <p class="font-semibold">New user registered</p>
+                            <p class="text-sm opacity-60">2 minutes ago</p>
+                        </div>
+                        <span class="text-primary text-sm">View</span>
                     </div>
-                    <span class="text-blue-600 text-sm">View</span>
-                </div>
 
-                <div class="flex items-center gap-4 p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
-                    <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">💳</div>
-                    <div class="flex-1">
-                        <p class="font-semibold text-gray-800">Payment received</p>
-                        <p class="text-sm text-gray-500">15 minutes ago</p>
+                    <div class="flex items-center gap-4 p-4 bg-base-200 rounded-lg hover:bg-base-300 transition">
+                        <div class="avatar placeholder">
+                            <div class="bg-success text-success-content rounded-full w-10">
+                                <span>💳</span>
+                            </div>
+                        </div>
+                        <div class="flex-1">
+                            <p class="font-semibold">Payment received</p>
+                            <p class="text-sm opacity-60">15 minutes ago</p>
+                        </div>
+                        <span class="text-success text-sm">$299</span>
                     </div>
-                    <span class="text-green-600 text-sm">$299</span>
-                </div>
 
-                <div class="flex items-center gap-4 p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
-                    <div class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center">📧</div>
-                    <div class="flex-1">
-                        <p class="font-semibold text-gray-800">New message</p>
-                        <p class="text-sm text-gray-500">1 hour ago</p>
+                    <div class="flex items-center gap-4 p-4 bg-base-200 rounded-lg hover:bg-base-300 transition">
+                        <div class="avatar placeholder">
+                            <div class="bg-secondary text-secondary-content rounded-full w-10">
+                                <span>📧</span>
+                            </div>
+                        </div>
+                        <div class="flex-1">
+                            <p class="font-semibold">New message</p>
+                            <p class="text-sm opacity-60">1 hour ago</p>
+                        </div>
+                        <span class="text-secondary text-sm">Read</span>
                     </div>
-                    <span class="text-purple-600 text-sm">Read</span>
                 </div>
             </div>
         </div>
 
-        <div class="bg-white rounded-xl shadow-lg p-6">
-            <h2 class="text-xl font-bold text-gray-800 mb-4">Quick Actions</h2>
-            <div class="space-y-3">
-                <button
-                    class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded-lg font-semibold transition">
-                    + Add User
-                </button>
-                <button
-                    class="w-full bg-white hover:bg-gray-50 text-gray-800 py-3 rounded-lg font-semibold border-2 border-gray-200 transition">
-                    📊 View Reports
-                </button>
-                <button
-                    class="w-full bg-white hover:bg-gray-50 text-gray-800 py-3 rounded-lg font-semibold border-2 border-gray-200 transition">
-                    ⚙️ Settings
-                </button>
+        <div class="card bg-base-100 shadow-xl">
+            <div class="card-body">
+                <h2 class="card-title">Quick Actions</h2>
+                <div class="space-y-3">
+                    <button class="btn btn-primary w-full">+ Add User</button>
+                    <button class="btn btn-outline w-full">📊 View Reports</button>
+                    <button class="btn btn-outline w-full">⚙️ Settings</button>
+                </div>
             </div>
         </div>
     </div>

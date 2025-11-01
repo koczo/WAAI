@@ -1,42 +1,21 @@
-<div class="p-6 border-b border-indigo-500">
-    <a class="text-2xl font-bold" href="">WAAI</a>
+<div class="menu bg-primary text-primary-content w-64 min-h-full p-4">
+    <div class="mb-4">
+        <a class="text-2xl font-bold" href="">WAAI</a>
+    </div>
+    <ul>
+        <li><NavLink href="" Match="NavLinkMatch.All">🏠 Home</NavLink></li>
+        <li><NavLink href="counter">➕ Counter</NavLink></li>
+        <li><NavLink href="weather">🌤️ Weather</NavLink></li>
+        <li><NavLink href="cards">🎴 Cards</NavLink></li>
+        <li><NavLink href="forms">📝 Forms</NavLink></li>
+        <li><NavLink href="dashboard">📊 Dashboard</NavLink></li>
+        <li><NavLink href="fintech">💳 Fintech</NavLink></li>
+        <li><NavLink href="ecommerce">🛒 E-commerce</NavLink></li>
+        <li><NavLink href="credit-rating">💯 Credit Rating</NavLink></li>
+        <li><NavLink href="company-rating">⭐ Company Rating</NavLink></li>
+        <li><NavLink href="onboarding">🚀 Onboarding</NavLink></li>
+    </ul>
 </div>
-
-<nav class="flex flex-col p-4 space-y-2">
-    <NavLink class="px-4 py-3 rounded-lg hover:bg-indigo-500 transition" href="" Match="NavLinkMatch.All">
-        🏠 Home
-    </NavLink>
-    <NavLink class="px-4 py-3 rounded-lg hover:bg-indigo-500 transition" href="counter">
-        ➕ Counter
-    </NavLink>
-    <NavLink class="px-4 py-3 rounded-lg hover:bg-indigo-500 transition" href="weather">
-        🌤️ Weather
-    </NavLink>
-    <NavLink class="px-4 py-3 rounded-lg hover:bg-indigo-500 transition" href="cards">
-        🎴 Cards
-    </NavLink>
-    <NavLink class="px-4 py-3 rounded-lg hover:bg-indigo-500 transition" href="forms">
-        📝 Forms
-    </NavLink>
-    <NavLink class="px-4 py-3 rounded-lg hover:bg-indigo-500 transition" href="dashboard">
-        📊 Dashboard
-    </NavLink>
-    <NavLink class="px-4 py-3 rounded-lg hover:bg-indigo-500 transition" href="fintech">
-        💳 Fintech
-    </NavLink>
-    <NavLink class="px-4 py-3 rounded-lg hover:bg-indigo-500 transition" href="ecommerce">
-        🛒 E-commerce
-    </NavLink>
-    <NavLink class="px-4 py-3 rounded-lg hover:bg-indigo-500 transition" href="credit-rating">
-        💯 Credit Rating
-    </NavLink>
-    <NavLink class="px-4 py-3 rounded-lg hover:bg-indigo-500 transition" href="company-rating">
-        ⭐ Company Rating
-    </NavLink>
-    <NavLink class="px-4 py-3 rounded-lg hover:bg-indigo-500 transition" href="onboarding">
-        🚀 Onboarding
-    </NavLink>
-</nav>
 
 @code {
     private bool collapseNavMenu = true;
