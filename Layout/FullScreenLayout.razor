@@ -1,33 +1,61 @@
 @using WAAI.Core.Components
+@using Blazored.LocalStorage
+@inject ILocalStorageService LocalStorage
 @inherits LayoutComponentBase
-<div class="drawer lg:drawer-open h-screen overflow-hidden">
-    <input id="main-drawer" type="checkbox" class="drawer-toggle"/>
-    <div class="drawer-content flex flex-col h-screen overflow-hidden">
-        <div class="navbar bg-base-100 shadow-sm">
-            <div class="flex-none lg:hidden">
-                <label for="main-drawer" class="btn btn-square btn-ghost">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                         class="inline-block w-6 h-6 stroke-current">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
-                </label>
+
+@if (_horizontalMenu)
+{
+    <div class="flex flex-col h-screen overflow-hidden">
+        <div class="navbar bg-primary text-primary-content shadow-sm">
+            <div class="flex-1">
+                <NavMenu/>
             </div>
-            <div class="flex-1"></div>
         </div>
         <main class="flex-1 h-0">
             @Body
         </main>
     </div>
-    <div class="drawer-side">
-        <label for="main-drawer" class="drawer-overlay"></label>
-        <div class="flex flex-col h-full">
-            <div class="flex-1">
-                <NavMenu/>
+}
+else
+{
+    <div class="drawer lg:drawer-open h-screen overflow-hidden">
+        <input id="main-drawer" type="checkbox" class="drawer-toggle"/>
+        <div class="drawer-content flex flex-col h-screen overflow-hidden">
+            <div class="navbar bg-base-100 shadow-sm">
+                <div class="flex-none lg:hidden">
+                    <label for="main-drawer" class="btn btn-square btn-ghost">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                             class="inline-block w-6 h-6 stroke-current">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </label>
+                </div>
+                <div class="flex-1"></div>
             </div>
-            <div class="p-4 text-center">
-                <AppVersion/>
+            <main class="flex-1 h-0">
+                @Body
+            </main>
+        </div>
+        <div class="drawer-side">
+            <label for="main-drawer" class="drawer-overlay"></label>
+            <div class="flex flex-col h-full">
+                <div class="flex-1">
+                    <NavMenu/>
+                </div>
+                <div class="p-4 text-center">
+                    <AppVersion/>
+                </div>
             </div>
         </div>
     </div>
-</div>
+}
+
+@code {
+    private bool _horizontalMenu;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _horizontalMenu = await LocalStorage.GetItemAsync<bool>("horizontalMenu");
+    }
+}
