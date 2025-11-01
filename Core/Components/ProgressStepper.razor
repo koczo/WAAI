@@ -1,11 +1,13 @@
 @using Ardalis.SmartEnum
 @typeparam TStep where TStep : Ardalis.SmartEnum.SmartEnum<TStep>
 
-<ul class="steps w-full mb-8">
-    @foreach (var step in SmartEnum<TStep>.List.OrderBy(s => s.Value))
-    {
-        <li class="step @(CurrentStep >= step ? "step-primary" : "")" data-content="@step.Value">
-            @step.Name
-        </li>
-    }
-</ul>
+<div class="breadcrumbs mb-8">
+    <ul>
+        @foreach (var step in SmartEnum<TStep>.List.OrderBy(s => s.Value))
+        {
+            <li class="@(CurrentStep >= step ? "font-bold text-primary" : "opacity-50")">
+                @step.Name
+            </li>
+        }
+    </ul>
+</div>
