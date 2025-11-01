@@ -2,7 +2,7 @@
 @inherits LayoutComponentBase
 <div class="drawer lg:drawer-open">
     <input id="main-drawer" type="checkbox" class="drawer-toggle"/>
-    <div class="drawer-content flex flex-col">
+    <div class="drawer-content flex flex-col min-h-screen">
         <div class="navbar bg-base-100 shadow-sm">
             <div class="flex-none lg:hidden">
                 <label for="main-drawer" class="btn btn-square btn-ghost">
@@ -18,7 +18,7 @@
                 <a href="https://learn.microsoft.com/aspnet/core/" target="_blank" class="btn btn-ghost">About</a>
             </div>
         </div>
-        <main class="flex-1 p-6 bg-base-200">
+        <main class="flex-1 p-6 bg-base-200 min-h-0">
             @Body
         </main>
     </div>
