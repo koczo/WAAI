@@ -1,6 +1,8 @@
+using WAAI.Core.Models;
+
 namespace WAAI.Features.UserOnboarding.Steps.Preferences;
 
-public class PreferencesInfo
+public class PreferencesInfo : IStepModel
 {
     public string Language { get; set; } = "en";
     public string Theme { get; set; } = "light";

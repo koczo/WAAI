@@ -20,6 +20,5 @@
 </div>
 
 @code {
-    [CascadingParameter] public EditContext EditContext { get; set; } = null!;
-    private PersonalInfo Model => (PersonalInfo)EditContext.Model;
+    [Parameter] public PersonalInfo Model { get; set; } = new();
 }

@@ -32,9 +32,9 @@
 </div>
 
 @code {
-    [CascadingParameter] public EditContext EditContext { get; set; } = null!;
-    private PreferencesInfo Model => (PreferencesInfo)EditContext.Model;
+    [Parameter] public PreferencesInfo Model { get; set; } = new();
 
+    
     private void SetThemeLight() => Model.Theme = "light";
     private void SetThemeDark() => Model.Theme = "dark";
     private void SetThemeAuto() => Model.Theme = "auto";

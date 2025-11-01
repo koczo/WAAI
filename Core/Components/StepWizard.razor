@@ -1,4 +1,5 @@
 @using Ardalis.SmartEnum
+@using WAAI.Core.Models
 @typeparam TStep where TStep : SmartEnum<TStep>
 @using Blazilla
 
@@ -10,45 +11,46 @@
 
     <EditForm EditContext="_editContext" OnValidSubmit="NextStep">
         <FluentValidator />
-        
         @StepContent
-
-        <div class="flex @(IsFirstStep() ? "justify-end" : "justify-between") mt-8 pt-6 border-t border-gray-200">
-            <Button OnClick="PreviousStep" 
-                    Visible="@(!IsFirstStep())"
-                    Variant="Button.ButtonVariant.Secondary">
-                ← Previous
-            </Button>
-            
-            @if (!IsLastStep())
-            {
-                <Button Type="submit" Variant="Button.ButtonVariant.Primary">
-                    Next →
-                </Button>
-            }
-            else
-            {
-                <Button OnClick="OnComplete" Variant="Button.ButtonVariant.Success">
-                    @CompleteButtonText
-                </Button>
-            }
-        </div>
     </EditForm>
+
+    <div class="flex @(IsFirstStep() ? "justify-end" : "justify-between") mt-8 pt-6 border-t border-gray-200">
+        <Button OnClick="PreviousStep" 
+                Visible="@(!IsFirstStep())"
+                Variant="Button.ButtonVariant.Secondary">
+            ← Previous
+        </Button>
+        
+        @if (!IsLastStep())
+        {
+            <Button OnClick="HandleNext" Variant="Button.ButtonVariant.Primary">
+                Next →
+            </Button>
+        }
+        else
+        {
+            <Button OnClick="OnComplete" Variant="Button.ButtonVariant.Success">
+                @CompleteButtonText
+            </Button>
+        }
+    </div>
 </Card>
 
 @code {
     [Parameter] public TStep CurrentStep { get; set; } = default!;
     [Parameter] public EventCallback<TStep> CurrentStepChanged { get; set; }
     [Parameter] public RenderFragment? StepContent { get; set; }
-    [Parameter] public Func<TStep, object> GetModelForStep { get; set; } = null!;
+    [Parameter] public Dictionary<TStep, IStepModel> Models { get; set; } = null!;
     [Parameter] public EventCallback OnComplete { get; set; }
     [Parameter] public string CompleteButtonText { get; set; } = "Finish ✓";
     [Parameter] public bool ShowProgressStepper { get; set; } = true;
 
     private EditContext _editContext = null!;
+    private List<TStep> _steps = null!;
 
     protected override void OnInitialized()
     {
+        _steps = SmartEnum<TStep>.List.OrderBy(x => x).ToList();
         _editContext = new EditContext(GetModelForStep(CurrentStep));
     }
 
@@ -57,13 +59,23 @@
         _editContext = new EditContext(GetModelForStep(CurrentStep));
     }
 
+    private IStepModel GetModelForStep(TStep step) =>
+        Models.TryGetValue(step, out var model) ? model : throw new InvalidOperationException("Step does not exist");
+
+    private async Task HandleNext()
+    {
+        if (_editContext.Validate())
+        {
+            await NextStep();
+        }
+    }
+
     private async Task NextStep()
     {
-        var steps = SmartEnum<TStep>.List.ToArray();
-        var currentIndex = Array.IndexOf(steps, CurrentStep);
-        if (currentIndex < steps.Length - 1)
+        var currentIndex = _steps.IndexOf(CurrentStep);
+        if (currentIndex < _steps.Count - 1)
         {
-            CurrentStep = steps[currentIndex + 1];
+            CurrentStep = _steps[currentIndex + 1];
             await CurrentStepChanged.InvokeAsync(CurrentStep);
             _editContext = new EditContext(GetModelForStep(CurrentStep));
         }
@@ -71,25 +83,16 @@
 
     private async Task PreviousStep()
     {
-        var steps = SmartEnum<TStep>.List.ToArray();
-        var currentIndex = Array.IndexOf(steps, CurrentStep);
+        var currentIndex = _steps.IndexOf(CurrentStep);
         if (currentIndex > 0)
         {
-            CurrentStep = steps[currentIndex - 1];
+            CurrentStep = _steps[currentIndex - 1];
             await CurrentStepChanged.InvokeAsync(CurrentStep);
             _editContext = new EditContext(GetModelForStep(CurrentStep));
         }
     }
 
-    private bool IsFirstStep()
-    {
-        var steps = SmartEnum<TStep>.List.ToArray();
-        return Array.IndexOf(steps, CurrentStep) == 0;
-    }
+    private bool IsFirstStep() => _steps.IndexOf(CurrentStep) == 0;
 
-    private bool IsLastStep()
-    {
-        var steps = SmartEnum<TStep>.List.ToArray();
-        return Array.IndexOf(steps, CurrentStep) == steps.Length - 1;
-    }
+    private bool IsLastStep() => _steps.IndexOf(CurrentStep) == _steps.Count - 1;
 }
