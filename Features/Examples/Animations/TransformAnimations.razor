@@ -1,0 +1,105 @@
+@page "/animations/transform"
+
+<PageTitle>Transform Animations</PageTitle>
+
+<div class="max-w-7xl mx-auto">
+    <div class="flex items-center gap-4 mb-8">
+        <a href="/animations" class="btn btn-circle btn-sm">←</a>
+        <h1 class="text-4xl font-bold">🔄 Transform Effects</h1>
+    </div>
+
+    <div class="space-y-12">
+        <section>
+            <h2 class="text-2xl font-bold mb-4">Rotate & Flip</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="avatar animate-rotate-in">
+                    <div class="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                        <img src="https://picsum.photos/seed/rotate/200" alt="Rotate" />
+                    </div>
+                </div>
+                <div class="avatar animate-flip-in-x">
+                    <div class="w-24 rounded-full ring ring-secondary ring-offset-base-100 ring-offset-2">
+                        <img src="https://picsum.photos/seed/flipx/200" alt="Flip X" />
+                    </div>
+                </div>
+                <div class="avatar animate-flip-in-y">
+                    <div class="w-24 rounded-full ring ring-accent ring-offset-base-100 ring-offset-2">
+                        <img src="https://picsum.photos/seed/flipy/200" alt="Flip Y" />
+                    </div>
+                </div>
+                <div class="avatar animate-spin-slow">
+                    <div class="w-24 rounded-full ring ring-neutral ring-offset-base-100 ring-offset-2">
+                        <img src="https://picsum.photos/seed/spin/200" alt="Spin" />
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="text-2xl font-bold mb-4">Roll & Rotate</h2>
+            <div class="flex flex-wrap gap-6 items-center">
+                <div class="avatar animate-roll-in">
+                    <div class="w-20 rounded-full ring ring-accent ring-offset-base-100 ring-offset-2">
+                        <img src="https://picsum.photos/seed/roll/200" alt="Roll" />
+                    </div>
+                </div>
+                <div class="avatar animate-rotate-scale">
+                    <div class="w-20 rounded-full ring ring-secondary ring-offset-base-100 ring-offset-2">
+                        <img src="https://picsum.photos/seed/rotatescale/200" alt="Rotate Scale" />
+                    </div>
+                </div>
+                <div class="badge badge-lg badge-primary animate-flip-horizontal">Flip H</div>
+                <div class="badge badge-lg badge-secondary animate-flip-vertical">Flip V</div>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="text-2xl font-bold mb-4">Scale & Zoom</h2>
+            <div class="flex flex-wrap gap-6">
+                <div class="stat bg-base-200 rounded-box shadow animate-zoom-in">
+                    <div class="stat-title">Zoom In</div>
+                    <div class="stat-value text-primary">98%</div>
+                    <div class="stat-desc">Scale up effect</div>
+                </div>
+                <div class="stat bg-base-200 rounded-box shadow animate-scale-up">
+                    <div class="stat-title">Scale Up</div>
+                    <div class="stat-value text-secondary">2.5x</div>
+                    <div class="stat-desc">Continuous scale</div>
+                </div>
+                <div class="stat bg-base-200 rounded-box shadow hover:animate-pulse-scale">
+                    <div class="stat-title">Hover Scale</div>
+                    <div class="stat-value text-accent">∞</div>
+                    <div class="stat-desc">Interactive pulse</div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="text-2xl font-bold mb-4">3D Card Flip</h2>
+            <div class="flex flex-wrap gap-6 justify-center">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="card bg-gradient-to-br from-primary to-secondary text-primary-content shadow-2xl w-64 h-80">
+                                <div class="card-body items-center justify-center text-center">
+                                    <h3 class="card-title text-3xl mb-4">Front</h3>
+                                    <p class="text-lg">Hover to flip!</p>
+                                    <div class="text-6xl mt-4">🎴</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flip-card-back">
+                            <div class="card bg-gradient-to-br from-accent to-secondary text-accent-content shadow-2xl w-64 h-80">
+                                <div class="card-body items-center justify-center text-center">
+                                    <h3 class="card-title text-3xl mb-4">Back</h3>
+                                    <p class="text-lg">3D effect!</p>
+                                    <div class="text-6xl mt-4">✨</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

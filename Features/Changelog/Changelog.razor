@@ -3,7 +3,7 @@
 
 <PageTitle>Changelog</PageTitle>
 
-<div class="max-w-4xl mx-auto">
+<div class="max-w-4xl mx-auto p-6">
     <h1 class="text-4xl font-bold mb-8">Changelog</h1>
 
     @if (_commits == null)
@@ -20,36 +20,34 @@
     }
     else
     {
-        <ul class="timeline timeline-vertical">
-            @foreach (var commit in _commits)
+        <div class="space-y-6">
+            @foreach (var group in _commits.GroupBy(c => c.Date.ToString("yyyy-MM-dd")))
             {
-                <li>
-                    @if (commit != _commits.First())
-                    {
-                        <hr/>
-                    }
-                    <div class="timeline-start text-sm">@commit.Date.ToString("yyyy-MM-dd HH:mm")</div>
-                    <div class="timeline-middle">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
-                             class="w-5 h-5 text-primary">
-                            <path fill-rule="evenodd"
-                                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
-                                  clip-rule="evenodd"/>
-                        </svg>
+                <div class="card bg-base-200 shadow-xl">
+                    <div class="card-body">
+                        <h2 class="card-title text-2xl">@group.Key</h2>
+                        <div class="space-y-4">
+                            @foreach (var commit in group)
+                            {
+                                var (type, description) = ParseCommit(commit.Message);
+                                <div class="flex gap-3">
+                                    <div class="badge @GetBadgeClass(type) badge-lg">@type</div>
+                                    <div class="flex-1">
+                                        <p class="font-medium">@description</p>
+                                        <div class="flex gap-2 items-center mt-1">
+                                            <span class="text-xs opacity-60">@commit.Sha.Substring(0, 7)</span>
+                                            <span class="text-xs opacity-60">•</span>
+                                            <span class="text-xs opacity-60">@commit.Date.ToString("HH:mm")</span>
+                                            <a href="@commit.Url" target="_blank" class="link link-primary text-xs">View</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
                     </div>
-                    <div class="timeline-end timeline-box">
-                        <a href="@commit.Url" target="_blank" class="link link-primary font-semibold">
-                            @commit.Message
-                        </a>
-                        <p class="text-sm opacity-60">@(commit.Sha.Length > 7 ? commit.Sha.Substring(0, 7) : commit.Sha)</p>
-                    </div>
-                    @if (commit != _commits.Last())
-                    {
-                        <hr/>
-                    }
-                </li>
+                </div>
             }
-        </ul>
+        </div>
     }
 </div>
 
@@ -67,6 +65,33 @@
             _commits = new List<CommitInfo>();
         }
     }
+
+    private (string type, string description) ParseCommit(string message)
+    {
+        var firstLine = message.Split('\n')[0];
+        var colonIndex = firstLine.IndexOf(':');
+        
+        if (colonIndex > 0 && colonIndex < 20)
+        {
+            var type = firstLine.Substring(0, colonIndex).Trim();
+            var desc = firstLine.Substring(colonIndex + 1).Trim();
+            return (type, desc);
+        }
+        
+        return ("update", firstLine);
+    }
+
+    private string GetBadgeClass(string type) => type.ToLower() switch
+    {
+        "feat" => "badge-success",
+        "fix" => "badge-error",
+        "docs" => "badge-info",
+        "style" => "badge-secondary",
+        "refactor" => "badge-warning",
+        "test" => "badge-accent",
+        "chore" => "badge-neutral",
+        _ => "badge-ghost"
+    };
 
     private class CommitInfo
     {
@@ -88,5 +113,4 @@
     {
         public DateTime Date { get; set; }
     }
-
 }

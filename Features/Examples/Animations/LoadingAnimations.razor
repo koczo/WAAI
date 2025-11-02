@@ -1,0 +1,59 @@
+@page "/animations/loading"
+
+<PageTitle>Loading Animations</PageTitle>
+
+<div class="max-w-7xl mx-auto">
+    <div class="flex items-center gap-4 mb-8">
+        <a href="/animations" class="btn btn-circle btn-sm">←</a>
+        <h1 class="text-4xl font-bold">⏳ Loading Animations</h1>
+    </div>
+
+    <div class="space-y-12">
+        <section>
+            <h2 class="text-2xl font-bold mb-4">Spinners</h2>
+            <div class="flex flex-wrap gap-6 items-center">
+                <span class="loading loading-spinner loading-xs"></span>
+                <span class="loading loading-spinner loading-sm"></span>
+                <span class="loading loading-spinner loading-md"></span>
+                <span class="loading loading-spinner loading-lg"></span>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="text-2xl font-bold mb-4">Dots & Rings</h2>
+            <div class="flex flex-wrap gap-6 items-center">
+                <span class="loading loading-dots loading-lg text-primary"></span>
+                <span class="loading loading-ring loading-lg text-secondary"></span>
+                <span class="loading loading-ball loading-lg text-accent"></span>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="text-2xl font-bold mb-4">Bars & Infinity</h2>
+            <div class="flex flex-wrap gap-6 items-center">
+                <span class="loading loading-bars loading-lg text-info"></span>
+                <span class="loading loading-infinity loading-lg text-warning"></span>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="text-2xl font-bold mb-4">Progress Indicators</h2>
+            <div class="flex flex-wrap gap-6 items-center">
+                <div class="radial-progress text-primary" style="--value:25;">25%</div>
+                <div class="radial-progress text-secondary" style="--value:50;">50%</div>
+                <div class="radial-progress text-accent" style="--value:75;">75%</div>
+                <div class="radial-progress text-success" style="--value:100;">100%</div>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="text-2xl font-bold mb-4">Skeleton Loaders</h2>
+            <div class="flex flex-col gap-4 w-full max-w-md">
+                <div class="skeleton h-32 w-full"></div>
+                <div class="skeleton h-4 w-28"></div>
+                <div class="skeleton h-4 w-full"></div>
+                <div class="skeleton h-4 w-full"></div>
+            </div>
+        </section>
+    </div>
+</div>

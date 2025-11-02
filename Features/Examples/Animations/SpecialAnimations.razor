@@ -1,0 +1,86 @@
+@page "/animations/special"
+
+<PageTitle>Special Animations</PageTitle>
+
+<div class="max-w-7xl mx-auto">
+    <div class="flex items-center gap-4 mb-8">
+        <a href="/animations" class="btn btn-circle btn-sm">←</a>
+        <h1 class="text-4xl font-bold">✨ Special Effects</h1>
+    </div>
+
+    <div class="space-y-12">
+        <section>
+            <h2 class="text-2xl font-bold mb-4">Glow & Pulse</h2>
+            <div class="flex flex-wrap gap-6">
+                <button class="btn btn-primary animate-glow">Glow Effect</button>
+                <button class="btn btn-secondary animate-pulse-glow">Pulse Glow</button>
+                <div class="radial-progress text-primary animate-progress" style="--value:70;">70%</div>
+                <div class="loading loading-spinner loading-lg text-accent animate-rainbow"></div>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="text-2xl font-bold mb-4">Shadow Effects</h2>
+            <div class="flex flex-wrap gap-6">
+                <div class="card bg-base-100 shadow-xl w-48 animate-shadow-drop">
+                    <div class="card-body items-center text-center p-4">
+                        <span class="text-2xl">📦</span>
+                        <p class="text-sm">Drop Shadow</p>
+                    </div>
+                </div>
+                <div class="card bg-base-100 shadow-xl w-48 animate-shadow-inset">
+                    <div class="card-body items-center text-center p-4">
+                        <span class="text-2xl">🔲</span>
+                        <p class="text-sm">Inset Shadow</p>
+                    </div>
+                </div>
+                <button class="btn btn-primary animate-shadow-pulse">Pulse Shadow</button>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="text-2xl font-bold mb-4">Background Effects</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="card shadow-xl animate-bg-pan-left">
+                    <div class="card-body">
+                        <h3 class="card-title">Pan Left</h3>
+                        <p>Background panning</p>
+                    </div>
+                </div>
+                <div class="card shadow-xl animate-bg-pan-right">
+                    <div class="card-body">
+                        <h3 class="card-title">Pan Right</h3>
+                        <p>Smooth motion</p>
+                    </div>
+                </div>
+                <div class="card shadow-xl animate-kenburns">
+                    <div class="card-body">
+                        <h3 class="card-title">Ken Burns</h3>
+                        <p>Zoom & pan</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="text-2xl font-bold mb-4">Light Speed</h2>
+            <div class="flex flex-wrap gap-4">
+                <div class="badge badge-lg badge-primary animate-light-speed-in-right">Light Speed In</div>
+                <div class="badge badge-lg badge-secondary animate-light-speed-in-left">Light Speed In Left</div>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="text-2xl font-bold mb-4">Special Effects</h2>
+            <div class="flex flex-wrap gap-6">
+                <button class="btn btn-primary animate-jack-in-box">Jack In Box</button>
+                <div class="avatar animate-flip">
+                    <div class="w-20 rounded-full ring ring-secondary ring-offset-base-100 ring-offset-2">
+                        <img src="https://picsum.photos/seed/flip/200" alt="Flip" />
+                    </div>
+                </div>
+                <button class="btn btn-accent animate-zoom-out-in">Zoom Out In</button>
+            </div>
+        </section>
+    </div>
+</div>
