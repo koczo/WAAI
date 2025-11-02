@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Components;
 
-namespace WAAI.Features.UserOnboarding.Steps.Account;
+namespace WAAI.Features.Examples.UserOnboarding.Steps.Account;
 
 public partial class AccountStep
 {

@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Components;
 
-namespace WAAI.Features.UserOnboarding.Steps.Personal;
+namespace WAAI.Features.Examples.UserOnboarding.Steps.Personal;
 
 public partial class PersonalStep
 {

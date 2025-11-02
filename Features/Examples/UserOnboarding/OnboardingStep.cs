@@ -1,6 +1,6 @@
 using Ardalis.SmartEnum;
 
-namespace WAAI.Features.UserOnboarding;
+namespace WAAI.Features.Examples.UserOnboarding;
 
 public class OnboardingStep : SmartEnum<OnboardingStep>
 {

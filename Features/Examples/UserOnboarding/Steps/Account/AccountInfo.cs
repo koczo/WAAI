@@ -1,6 +1,6 @@
 using WAAI.Core.Models;
 
-namespace WAAI.Features.UserOnboarding.Steps.Account;
+namespace WAAI.Features.Examples.UserOnboarding.Steps.Account;
 
 public class AccountInfo : IStepModel
 {

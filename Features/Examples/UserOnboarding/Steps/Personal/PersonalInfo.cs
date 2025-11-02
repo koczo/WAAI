@@ -1,6 +1,6 @@
 using WAAI.Core.Models;
 
-namespace WAAI.Features.UserOnboarding.Steps.Personal;
+namespace WAAI.Features.Examples.UserOnboarding.Steps.Personal;
 
 public class PersonalInfo : IStepModel
 {

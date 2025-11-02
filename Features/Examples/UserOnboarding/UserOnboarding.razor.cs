@@ -1,12 +1,12 @@
 using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components;
 using WAAI.Core.Models;
-using WAAI.Features.UserOnboarding.Steps.Account;
-using WAAI.Features.UserOnboarding.Steps.Complete;
-using WAAI.Features.UserOnboarding.Steps.Personal;
-using WAAI.Features.UserOnboarding.Steps.Preferences;
+using WAAI.Features.Examples.UserOnboarding.Steps.Account;
+using WAAI.Features.Examples.UserOnboarding.Steps.Complete;
+using WAAI.Features.Examples.UserOnboarding.Steps.Personal;
+using WAAI.Features.Examples.UserOnboarding.Steps.Preferences;
 
-namespace WAAI.Features.UserOnboarding;
+namespace WAAI.Features.Examples.UserOnboarding;
 
 public partial class UserOnboarding
 {

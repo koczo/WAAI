@@ -1,6 +1,6 @@
 using WAAI.Core.Models;
 
-namespace WAAI.Features.UserOnboarding.Steps.Complete;
+namespace WAAI.Features.Examples.UserOnboarding.Steps.Complete;
 
 public class CompleteSummary : IStepModel
 {

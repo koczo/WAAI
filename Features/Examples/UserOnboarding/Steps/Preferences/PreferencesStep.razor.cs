@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Components;
 
-namespace WAAI.Features.UserOnboarding.Steps.Preferences;
+namespace WAAI.Features.Examples.UserOnboarding.Steps.Preferences;
 
 public partial class PreferencesStep
 {

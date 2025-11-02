@@ -1,6 +1,6 @@
 using WAAI.Core.Models;
 
-namespace WAAI.Features.UserOnboarding.Steps.Preferences;
+namespace WAAI.Features.Examples.UserOnboarding.Steps.Preferences;
 
 public class PreferencesInfo : IStepModel
 {
