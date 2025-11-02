@@ -35,6 +35,11 @@
                                     <div class="flex-1">
                                         <p class="font-medium">@description</p>
                                         <div class="flex gap-2 items-center mt-1">
+                                            @if (!string.IsNullOrEmpty(commit.Version))
+                                            {
+                                                <span class="badge badge-sm badge-outline">@commit.Version</span>
+                                                <span class="text-xs opacity-60">•</span>
+                                            }
                                             <span class="text-xs opacity-60">@commit.Sha.Substring(0, 7)</span>
                                             <span class="text-xs opacity-60">•</span>
                                             <span class="text-xs opacity-60">@commit.Date.ToString("HH:mm")</span>
@@ -53,12 +58,26 @@
 
 @code {
     private List<CommitInfo>? _commits;
+    private List<TagInfo>? _tags;
 
     protected override async Task OnInitializedAsync()
     {
         try
         {
             _commits = await Http.GetFromJsonAsync<List<CommitInfo>>("https://api.github.com/repos/koczo/WAAI/commits");
+            _tags = await Http.GetFromJsonAsync<List<TagInfo>>("https://api.github.com/repos/koczo/WAAI/tags");
+            
+            if (_commits != null && _tags != null)
+            {
+                foreach (var commit in _commits)
+                {
+                    var tag = _tags.FirstOrDefault(t => t.Commit.Sha == commit.Sha);
+                    if (tag != null)
+                    {
+                        commit.Version = tag.Name;
+                    }
+                }
+            }
         }
         catch
         {
@@ -101,6 +120,7 @@
         public string Url => Html_Url;
         public DateTime Date => Commit.Author.Date;
         public string Message => Commit.Message;
+        public string Version { get; set; } = string.Empty;
     }
 
     private class CommitDetails
@@ -112,5 +132,16 @@
     private class AuthorInfo
     {
         public DateTime Date { get; set; }
+    }
+
+    private class TagInfo
+    {
+        public string Name { get; set; } = string.Empty;
+        public TagCommit Commit { get; set; } = new();
+    }
+
+    private class TagCommit
+    {
+        public string Sha { get; set; } = string.Empty;
     }
 }
