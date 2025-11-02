@@ -87,17 +87,15 @@
 
     private (string type, string description) ParseCommit(string message)
     {
-        var firstLine = message.Split('\n')[0];
+        var firstLine = message.Split('\n')[0].Replace("\"", string.Empty);
         var colonIndex = firstLine.IndexOf(':');
+
+        if (colonIndex is <= 0 or >= 20) return ("update", firstLine);
         
-        if (colonIndex > 0 && colonIndex < 20)
-        {
-            var type = firstLine.Substring(0, colonIndex).Trim();
-            var desc = firstLine.Substring(colonIndex + 1).Trim();
-            return (type, desc);
-        }
-        
-        return ("update", firstLine);
+        var type = firstLine.Substring(0, colonIndex).Trim();
+        var desc = firstLine.Substring(colonIndex + 1).Trim();
+        return (type, desc);
+
     }
 
     private string GetBadgeClass(string type) => type.ToLower() switch
@@ -109,7 +107,7 @@
         "refactor" => "badge-warning",
         "test" => "badge-accent",
         "chore" => "badge-neutral",
-        _ => "badge-ghost"
+        _ => "badge-ghost badge-dash"
     };
 
     private class CommitInfo

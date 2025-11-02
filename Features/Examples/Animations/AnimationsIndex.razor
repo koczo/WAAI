@@ -1,345 +1,70 @@
 @page "/animations"
-@inject IJSRuntime JS
 
 <PageTitle>CSS Animations</PageTitle>
 
-<div class="h-screen flex flex-col">
-    <div class="flex justify-between items-center p-6 border-b border-base-300">
-        <div>
-            <h1 class="text-3xl font-bold">CSS Animations Gallery</h1>
-            <p class="text-sm opacity-70">@GetCategoryName() (@(currentIndex + 1)/6)</p>
-        </div>
-        <button class="btn btn-primary btn-sm" @onclick="RestartAnimations">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd" />
-            </svg>
-            Restart
-        </button>
-    </div>
+<div class="max-w-7xl mx-auto p-6">
+    <h1 class="text-4xl font-bold mb-8">CSS Animations Gallery</h1>
+    <p class="text-lg mb-8">Explore different categories of CSS animations with DaisyUI components</p>
 
-    <div class="flex-1 relative">
-        <div class="carousel w-full h-full">
-            <div id="slide0" class="carousel-item w-full h-full">
-                <div class="w-full h-full overflow-y-auto p-8">
-                    @if (showContent)
-                    {
-                        <div class="space-y-12 max-w-7xl mx-auto">
-                            <h2 class="text-3xl font-bold">🎬 Entrance Animations</h2>
-                            <section>
-                                <h3 class="text-2xl font-bold mb-4">Bounce Effects</h3>
-                                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                                    <div class="card bg-base-200 shadow-xl animate-bounce-in">
-                                        <div class="card-body items-center text-center">
-                                            <div class="badge badge-primary badge-lg">Bounce In</div>
-                                            <p>Smooth entrance</p>
-                                        </div>
-                                    </div>
-                                    <div class="card bg-base-200 shadow-xl animate-bounce-scale">
-                                        <div class="card-body items-center text-center">
-                                            <div class="badge badge-secondary badge-lg">Bounce Scale</div>
-                                            <p>Continuous pulse</p>
-                                        </div>
-                                    </div>
-                                    <div class="card bg-base-200 shadow-xl hover:animate-bounce-hover">
-                                        <div class="card-body items-center text-center">
-                                            <div class="badge badge-accent badge-lg">Hover Me</div>
-                                            <p>Interactive bounce</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </section>
-                            <section>
-                                <h3 class="text-2xl font-bold mb-4">Fade Effects</h3>
-                                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                                    <div class="alert alert-info animate-fade-in"><span>Fade In</span></div>
-                                    <div class="alert alert-success animate-fade-in-up"><span>Fade In Up</span></div>
-                                    <div class="alert alert-warning animate-fade-in-down"><span>Fade In Down</span></div>
-                                    <div class="alert alert-error animate-fade-in-left"><span>Fade In Left</span></div>
-                                </div>
-                            </section>
-                            <section>
-                                <h3 class="text-2xl font-bold mb-4">Slide Effects</h3>
-                                <div class="flex flex-wrap gap-4">
-                                    <button class="btn btn-primary animate-slide-in-left">Slide Left</button>
-                                    <button class="btn btn-secondary animate-slide-in-right">Slide Right</button>
-                                    <button class="btn btn-accent animate-slide-in-up">Slide Up</button>
-                                    <button class="btn btn-neutral animate-slide-in-down">Slide Down</button>
-                                </div>
-                            </section>
-                            <section>
-                                <h3 class="text-2xl font-bold mb-4">Zoom Effects</h3>
-                                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                                    <div class="alert alert-info animate-zoom-in-up"><span>Zoom In Up</span></div>
-                                    <div class="alert alert-success animate-zoom-in-down"><span>Zoom In Down</span></div>
-                                    <div class="alert alert-warning animate-zoom-in-left"><span>Zoom In Left</span></div>
-                                    <div class="alert alert-error animate-zoom-in-right"><span>Zoom In Right</span></div>
-                                </div>
-                            </section>
-                            <section>
-                                <h3 class="text-2xl font-bold mb-4">Back Entrance</h3>
-                                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                                    <button class="btn btn-primary animate-back-in-up">Back In Up</button>
-                                    <button class="btn btn-secondary animate-back-in-down">Back In Down</button>
-                                    <button class="btn btn-accent animate-back-in-left">Back In Left</button>
-                                    <button class="btn btn-neutral animate-back-in-right">Back In Right</button>
-                                </div>
-                            </section>
-                        </div>
-                    }
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <a href="/animations/entrance" class="card bg-gradient-to-br from-primary to-secondary text-primary-content shadow-xl hover:shadow-2xl transition-shadow">
+            <div class="card-body">
+                <h2 class="card-title text-2xl">🎬 Entrance</h2>
+                <p>Bounce, Fade, Slide, Zoom, Back In</p>
+                <div class="card-actions justify-end">
+                    <div class="badge badge-outline">15+ effects</div>
                 </div>
             </div>
+        </a>
 
-            <div id="slide1" class="carousel-item w-full h-full">
-                <div class="w-full h-full overflow-y-auto p-8">
-                    @if (showContent)
-                    {
-                        <div class="space-y-12 max-w-7xl mx-auto">
-                            <h2 class="text-3xl font-bold">⚡ Attention Seekers</h2>
-                            <section>
-                                <h3 class="text-2xl font-bold mb-4">Shake & Wobble</h3>
-                                <div class="flex flex-wrap gap-4">
-                                    <div class="badge badge-lg badge-primary animate-shake">Shake</div>
-                                    <div class="badge badge-lg badge-secondary animate-wobble">Wobble</div>
-                                    <div class="badge badge-lg badge-accent animate-swing">Swing</div>
-                                    <div class="badge badge-lg badge-info animate-jello">Jello</div>
-                                </div>
-                            </section>
-                            <section>
-                                <h3 class="text-2xl font-bold mb-4">Flash & Pulse</h3>
-                                <div class="flex flex-wrap gap-4">
-                                    <div class="alert alert-warning animate-flash"><span>⚠️ Flash Alert</span></div>
-                                    <button class="btn btn-error animate-tada">Tada!</button>
-                                    <div class="badge badge-lg badge-info animate-head-shake">Head Shake</div>
-                                    <button class="btn btn-success animate-bounce-in-out">Bounce In/Out</button>
-                                </div>
-                            </section>
-                            <section>
-                                <h3 class="text-2xl font-bold mb-4">Heartbeat & Pulse</h3>
-                                <div class="flex flex-wrap gap-6 items-center">
-                                    <div class="btn btn-circle btn-lg btn-error animate-heartbeat">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-                                    </div>
-                                    <div class="avatar animate-pulse-ring">
-                                        <div class="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                                            <img src="https://picsum.photos/seed/pulse/200" alt="Pulse" />
-                                        </div>
-                                    </div>
-                                    <div class="badge badge-lg badge-success animate-ping-badge">Live</div>
-                                </div>
-                            </section>
-                            <section>
-                                <h3 class="text-2xl font-bold mb-4">Elastic & Rubber Band</h3>
-                                <div class="flex flex-wrap gap-6">
-                                    <button class="btn btn-primary animate-elastic">Elastic</button>
-                                    <button class="btn btn-secondary animate-rubber-band">Rubber Band</button>
-                                    <div class="card bg-base-200 shadow-xl w-48 animate-bounce-elastic">
-                                        <div class="card-body items-center text-center p-4">
-                                            <span class="text-2xl">🎾</span>
-                                            <p class="text-sm">Bouncy</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </section>
-                        </div>
-                    }
+        <a href="/animations/attention" class="card bg-gradient-to-br from-accent to-secondary text-accent-content shadow-xl hover:shadow-2xl transition-shadow">
+            <div class="card-body">
+                <h2 class="card-title text-2xl">⚡ Attention</h2>
+                <p>Shake, Wobble, Flash, Pulse, Heartbeat</p>
+                <div class="card-actions justify-end">
+                    <div class="badge badge-outline">12+ effects</div>
                 </div>
             </div>
+        </a>
 
-            <div id="slide2" class="carousel-item w-full h-full">
-                <div class="w-full h-full overflow-y-auto p-8">
-                    @if (showContent)
-                    {
-                        <div class="space-y-12 max-w-7xl mx-auto">
-                            <h2 class="text-3xl font-bold">🔄 Transform Animations</h2>
-                            <section>
-                                <h3 class="text-2xl font-bold mb-4">Rotate Effects</h3>
-                                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                                    <div class="alert alert-info animate-rotate-in"><span>Rotate In</span></div>
-                                    <div class="alert alert-success animate-rotate-scale"><span>Rotate Scale</span></div>
-                                    <div class="alert alert-warning animate-flip-horizontal"><span>Flip Horizontal</span></div>
-                                    <div class="alert alert-error animate-roll-in"><span>Roll In</span></div>
-                                </div>
-                            </section>
-                            <section>
-                                <h3 class="text-2xl font-bold mb-4">Flip Effects</h3>
-                                <div class="flex flex-wrap gap-4">
-                                    <button class="btn btn-primary animate-flip">Flip</button>
-                                    <button class="btn btn-secondary animate-flip-in-x">Flip X</button>
-                                    <button class="btn btn-accent animate-flip-in-y">Flip Y</button>
-                                    <button class="btn btn-neutral animate-flip-vertical">Flip Vertical</button>
-                                </div>
-                            </section>
-                            <section>
-                                <h3 class="text-2xl font-bold mb-4">3D Card Flip</h3>
-                                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                                    <div class="flip-card">
-                                        <div class="flip-card-inner">
-                                            <div class="flip-card-front card bg-primary text-primary-content shadow-xl">
-                                                <div class="card-body items-center text-center"><h3 class="card-title">Front</h3></div>
-                                            </div>
-                                            <div class="flip-card-back card bg-secondary text-secondary-content shadow-xl">
-                                                <div class="card-body items-center text-center"><h3 class="card-title">Back</h3></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </section>
-                        </div>
-                    }
+        <a href="/animations/transform" class="card bg-gradient-to-br from-info to-primary text-info-content shadow-xl hover:shadow-2xl transition-shadow">
+            <div class="card-body">
+                <h2 class="card-title text-2xl">🔄 Transform</h2>
+                <p>Rotate, Flip, Roll, Spin, 3D Effects</p>
+                <div class="card-actions justify-end">
+                    <div class="badge badge-outline">10+ effects</div>
                 </div>
             </div>
+        </a>
 
-            <div id="slide3" class="carousel-item w-full h-full">
-                <div class="w-full h-full overflow-y-auto p-8">
-                    @if (showContent)
-                    {
-                        <div class="space-y-12 max-w-7xl mx-auto">
-                            <h2 class="text-3xl font-bold">📝 Text Animations</h2>
-                            <section>
-                                <h3 class="text-2xl font-bold mb-4">Focus & Blur</h3>
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    <div class="card bg-base-200 shadow-xl">
-                                        <div class="card-body"><p class="text-2xl animate-text-focus-in">Focus In Effect</p></div>
-                                    </div>
-                                    <div class="card bg-base-200 shadow-xl">
-                                        <div class="card-body"><p class="text-2xl animate-text-blur-out">Blur Out Effect</p></div>
-                                    </div>
-                                </div>
-                            </section>
-                            <section>
-                                <h3 class="text-2xl font-bold mb-4">Typing & Tracking</h3>
-                                <div class="space-y-4">
-                                    <div class="alert alert-info"><span class="animate-typing">Typing animation effect...</span></div>
-                                    <div class="alert alert-success"><span class="animate-tracking-in">Tracking In</span></div>
-                                    <div class="alert alert-warning"><span class="animate-tracking-out">Tracking Out</span></div>
-                                </div>
-                            </section>
-                            <section>
-                                <h3 class="text-2xl font-bold mb-4">Special Text Effects</h3>
-                                <div class="flex flex-col gap-4">
-                                    <p class="text-3xl font-bold animate-text-float">Floating Text</p>
-                                    <p class="text-3xl font-bold animate-text-tilt">Tilting Text</p>
-                                </div>
-                            </section>
-                        </div>
-                    }
+        <a href="/animations/text" class="card bg-gradient-to-br from-success to-info text-success-content shadow-xl hover:shadow-2xl transition-shadow">
+            <div class="card-body">
+                <h2 class="card-title text-2xl">📝 Text</h2>
+                <p>Focus, Blur, Typing, Tracking, Gradient</p>
+                <div class="card-actions justify-end">
+                    <div class="badge badge-outline">8+ effects</div>
                 </div>
             </div>
+        </a>
 
-            <div id="slide4" class="carousel-item w-full h-full">
-                <div class="w-full h-full overflow-y-auto p-8">
-                    @if (showContent)
-                    {
-                        <div class="space-y-12 max-w-7xl mx-auto">
-                            <h2 class="text-3xl font-bold">✨ Special Effects</h2>
-                            <section>
-                                <h3 class="text-2xl font-bold mb-4">Glow Effects</h3>
-                                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                                    <div class="card bg-base-200 shadow-xl animate-glow">
-                                        <div class="card-body items-center"><div class="badge badge-primary badge-lg">Glow</div></div>
-                                    </div>
-                                    <div class="card bg-base-200 shadow-xl animate-pulse-glow">
-                                        <div class="card-body items-center"><div class="badge badge-secondary badge-lg">Glow Pulse</div></div>
-                                    </div>
-                                    <div class="card bg-base-200 shadow-xl animate-rainbow">
-                                        <div class="card-body items-center"><div class="badge badge-accent badge-lg">Rainbow</div></div>
-                                    </div>
-                                </div>
-                            </section>
-                            <section>
-                                <h3 class="text-2xl font-bold mb-4">Shadow Effects</h3>
-                                <div class="flex flex-wrap gap-4">
-                                    <button class="btn btn-primary animate-shadow-drop">Shadow Drop</button>
-                                    <button class="btn btn-secondary animate-shadow-pulse">Shadow Pulse</button>
-                                    <button class="btn btn-accent animate-shadow-inset">Shadow Inset</button>
-                                </div>
-                            </section>
-                            <section>
-                                <h3 class="text-2xl font-bold mb-4">Background Effects</h3>
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <div class="alert alert-info animate-bg-pan-left"><span>Background Pan Left</span></div>
-                                    <div class="alert alert-success animate-kenburns"><span>Ken Burns</span></div>
-                                </div>
-                            </section>
-                        </div>
-                    }
+        <a href="/animations/special" class="card bg-gradient-to-br from-warning to-error text-warning-content shadow-xl hover:shadow-2xl transition-shadow">
+            <div class="card-body">
+                <h2 class="card-title text-2xl">✨ Special</h2>
+                <p>Glow, Shadow, Background, Light Speed</p>
+                <div class="card-actions justify-end">
+                    <div class="badge badge-outline">10+ effects</div>
                 </div>
             </div>
+        </a>
 
-            <div id="slide5" class="carousel-item w-full h-full">
-                <div class="w-full h-full overflow-y-auto p-8">
-                    @if (showContent)
-                    {
-                        <div class="space-y-12 max-w-7xl mx-auto">
-                            <h2 class="text-3xl font-bold">⏳ Loading Animations</h2>
-                            <section>
-                                <h3 class="text-2xl font-bold mb-4">DaisyUI Spinners</h3>
-                                <div class="flex flex-wrap gap-8 items-center">
-                                    <span class="loading loading-spinner loading-lg text-primary"></span>
-                                    <span class="loading loading-spinner loading-lg text-secondary"></span>
-                                    <span class="loading loading-spinner loading-lg text-accent"></span>
-                                    <span class="loading loading-ring loading-lg text-info"></span>
-                                    <span class="loading loading-ball loading-lg text-success"></span>
-                                    <span class="loading loading-bars loading-lg text-warning"></span>
-                                    <span class="loading loading-infinity loading-lg text-error"></span>
-                                </div>
-                            </section>
-                            <section>
-                                <h3 class="text-2xl font-bold mb-4">Progress Indicators</h3>
-                                <div class="space-y-4">
-                                    <progress class="progress progress-primary w-full" value="70" max="100"></progress>
-                                    <progress class="progress progress-secondary w-full" value="40" max="100"></progress>
-                                    <progress class="progress progress-accent w-full" value="90" max="100"></progress>
-                                </div>
-                            </section>
-                            <section>
-                                <h3 class="text-2xl font-bold mb-4">Skeleton Loaders</h3>
-                                <div class="flex flex-col gap-4">
-                                    <div class="skeleton h-4 w-full"></div>
-                                    <div class="skeleton h-4 w-3/4"></div>
-                                    <div class="skeleton h-32 w-full"></div>
-                                </div>
-                            </section>
-                        </div>
-                    }
+        <a href="/animations/loading" class="card bg-gradient-to-br from-error to-warning text-error-content shadow-xl hover:shadow-2xl transition-shadow">
+            <div class="card-body">
+                <h2 class="card-title text-2xl">⏳ Loading</h2>
+                <p>Spinners, Dots, Rings, Bars, Progress</p>
+                <div class="card-actions justify-end">
+                    <div class="badge badge-outline">9+ effects</div>
                 </div>
             </div>
-        </div>
-
-        <div class="fixed left-5 right-5 top-1/2 -translate-y-1/2 flex justify-between pointer-events-none z-50">
-            <button class="btn btn-circle pointer-events-auto" @onclick="() => NavigateToSlide((currentIndex + 5) % 6)">❮</button>
-            <button class="btn btn-circle pointer-events-auto" @onclick="() => NavigateToSlide((currentIndex + 1) % 6)">❯</button>
-        </div>
+        </a>
     </div>
 </div>
-
-@code {
-    private bool showContent = true;
-    private int currentIndex = 0;
-
-    private string GetCategoryName() => currentIndex switch
-    {
-        0 => "🎬 Entrance",
-        1 => "⚡ Attention",
-        2 => "🔄 Transform",
-        3 => "📝 Text",
-        4 => "✨ Special",
-        5 => "⏳ Loading",
-        _ => ""
-    };
-
-    private async Task NavigateToSlide(int index)
-    {
-        currentIndex = index;
-        await JS.InvokeVoidAsync("eval", $"document.getElementById('slide{index}').scrollIntoView({{behavior: 'smooth', block: 'nearest', inline: 'start'}})");
-    }
-
-    private async Task RestartAnimations()
-    {
-        showContent = false;
-        StateHasChanged();
-        await Task.Delay(50);
-        showContent = true;
-        StateHasChanged();
-    }
-}
