@@ -14,6 +14,7 @@ jobs:
       contents: write
     outputs:
       new_tag: ${{ steps.tag_version.outputs.new_tag || '1.0.0-pr' }}
+      new_version: ${{ steps.tag_version.outputs.new_version || '1.0.0' }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -50,7 +51,7 @@ jobs:
       - name: Build CSS
         run: npm run build:css
       - name: Publish .NET
-        run: dotnet publish -c Release -o publish -p:Version=${{ needs.version.outputs.new_tag }}
+        run: dotnet publish -c Release -o publish -p:Version=${{ needs.version.outputs.new_version  }}
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
