@@ -10,6 +10,8 @@ on:
 jobs:
   version:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     outputs:
       new_tag: ${{ steps.tag_version.outputs.new_tag || '1.0.0-pr' }}
     steps:
