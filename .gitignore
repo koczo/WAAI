@@ -10,3 +10,4 @@ wwwroot/css/output.css
 package-lock.json
 /WAAI.sln.DotSettings.user
 !wwwroot/version.json
+.idx/dev.nix

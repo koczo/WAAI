@@ -1,5 +1,4 @@
-@inject HttpClient Http
-@inject NavigationManager Navigation
+@using System.Reflection
 
 <a @onclick="@(() => Navigation.NavigateTo("/changelog"))"
    class="text-xs opacity-50 cursor-pointer hover:opacity-100 transition">
@@ -7,24 +6,13 @@
 </a>
 
 @code {
-    private string _version = "...";
+    [Inject] private NavigationManager Navigation { get; set; } = default!;
+    private string _version = "1.0.0";
 
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
-        try
-        {
-            var versionData = await Http.GetFromJsonAsync<VersionData>("version.json");
-            _version = versionData?.Version ?? "1.0.0";
-        }
-        catch
-        {
-            _version = "1.0.0";
-        }
+        _version = Assembly.GetExecutingAssembly()
+            .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+            ?.InformationalVersion ?? "1.0.0";
     }
-
-    private class VersionData
-    {
-        public string Version { get; set; } = string.Empty;
-    }
-
 }
