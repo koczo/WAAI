@@ -12,7 +12,7 @@
     protected override void OnInitialized()
     {
         _version = Assembly.GetExecutingAssembly()
-            .GetCustomAttribute<AssemblyVersionAttribute>()
+            .GetCustomAttribute<AssemblyFileVersionAttribute>()
             ?.Version ?? "1.0.0";
     }
 }
