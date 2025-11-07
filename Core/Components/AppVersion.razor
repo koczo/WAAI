@@ -1,18 +1,27 @@
 @using System.Reflection
 
-<a @onclick="@(() => Navigation.NavigateTo("/changelog"))"
-   class="text-xs opacity-50 cursor-pointer hover:opacity-100 transition">
-    v@_version
-</a>
+<div class="tooltip">
+    <div class="tooltip-content">
+        <div class="animate-bounce text-orange-300 text-[10px] font-black">@_buildNumber</div>
+    </div>
+    <a @onclick="@(() => Navigation.NavigateTo("/changelog"))"
+       class="text-xs opacity-50 cursor-pointer hover:opacity-100 transition">
+        v@_version
+    </a>
+</div>
 
 @code {
     [Inject] private NavigationManager Navigation { get; set; } = default!;
     private string _version = "1.0.0";
+    private string _buildNumber = "1.0.0";
 
     protected override void OnInitialized()
     {
-        _version = Assembly.GetExecutingAssembly()
-            .GetCustomAttribute<AssemblyFileVersionAttribute>()
-            ?.Version ?? "1.0.0";
+        var informationalVersion = Assembly.GetExecutingAssembly()
+            .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+            ?.InformationalVersion.Split('+');
+
+        _version = informationalVersion?[0] ?? "dev";
+        _buildNumber = informationalVersion?[1] ?? "dev";
     }
 }
