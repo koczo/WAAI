@@ -1,6 +1,11 @@
 @if (_horizontalMenu)
 {
-    <ul class="menu menu-horizontal p-0">
+    <ul class="menu menu-horizontal p-0 flex items-center">
+        <li class="mx-auto">
+            <a href="" class="flex items-center justify-center p-0">
+                <img src="/favicon.png" alt="logo" class="w-12 h-12" />
+            </a>
+        </li>
         <li><NavLink href="" Match="NavLinkMatch.All">🏠 Home</NavLink></li>
         <li><NavLink href="settings">⚙️ Settings</NavLink></li>
     </ul>
@@ -8,8 +13,10 @@
 else
 {
     <div class="menu bg-primary text-primary-content w-64 min-h-full p-4">
-        <div class="mb-4 flex justify-between items-center">
-            <a class="text-2xl font-bold" href="">WAAI</a>
+        <div class="mb-4 w-full text-center">
+            <a href="" class="inline-block mx-auto p-0">
+                <img src="/favicon.png" alt="logo" class="w-24 h-24 mx-auto" />
+            </a>
         </div>
         <ul>
             <li><NavLink href="" Match="NavLinkMatch.All">🏠 Home</NavLink></li>
@@ -39,4 +46,3 @@ else
         </ul>
     </div>
 }
-

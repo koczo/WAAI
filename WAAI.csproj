@@ -17,6 +17,12 @@
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="9.0.10" PrivateAssets="all" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Content Update="wwwroot\favicon.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+    </ItemGroup>
+
     <Target Name="BuildTailwindCSS" BeforeTargets="Build">
         <Exec Command="npm run build:css" />
     </Target>
