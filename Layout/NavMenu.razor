@@ -1,3 +1,4 @@
+@using WAAI.Core.Components
 @if (_horizontalMenu)
 {
     <ul class="menu menu-horizontal p-0 flex items-center">
@@ -18,7 +19,7 @@ else
                 <img src="/favicon.png" alt="logo" class="w-24 h-24 mx-auto" />
             </a>
         </div>
-        <ul>
+        <ul class="menu w-full">
             <li><NavLink href="" Match="NavLinkMatch.All">🏠 Home</NavLink></li>
             <li><NavLink href="settings">⚙️ Settings</NavLink></li>
             <li>
@@ -44,5 +45,8 @@ else
                 </details>
             </li>
         </ul>
+        <div class="p-4 text-center">
+            <AppVersion/>
+        </div>
     </div>
 }

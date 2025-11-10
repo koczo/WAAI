@@ -3,6 +3,7 @@ using FluentValidation;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using WAAI;
+using WAAI.Core.Services;
 using WAAI.Features.Examples.UserOnboarding.Steps.Account;
 using WAAI.Features.Examples.UserOnboarding.Steps.Personal;
 using WAAI.Features.Examples.UserOnboarding.Steps.Preferences;
@@ -13,6 +14,7 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 builder.Services.AddBlazoredLocalStorage();
+builder.Services.AddScoped<MessageService>();
 builder.Services.AddSingleton<IValidator<PersonalInfo>, PersonalInfoValidator>();
 builder.Services.AddSingleton<IValidator<AccountInfo>, AccountInfoValidator>();
 builder.Services.AddSingleton<IValidator<PreferencesInfo>, PreferencesInfoValidator>();

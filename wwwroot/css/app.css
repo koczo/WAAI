@@ -9,3 +9,57 @@
 @plugin "daisyui" {
     themes: all;
 }
+
+/* Custom dark theme matching favicon and background pattern style */
+:root:has(input.theme-controller[value=waai-theme]:checked),
+[data-theme="waai-theme"] {
+    color-scheme: dark;
+    
+    /* Base colors - jasne tło z delikatnym odcieniem żółtym */
+    --color-base-100: oklch(98% 0.02 85);
+    --color-base-200: oklch(95% 0.05 85);
+    --color-base-300: oklch(90% 0.1 85);
+    --color-base-content: oklch(25% 0.05 280);
+    
+    /* Primary - Niebieski z ikon */
+    --color-primary: oklch(50% 0.15 250);
+    --color-primary-content: oklch(98% 0.02 250);
+    
+    /* Secondary - Zielony z ikon */
+    --color-secondary: oklch(65% 0.2 150);
+    --color-secondary-content: oklch(98% 0.02 150);
+    
+    /* Accent - Różowy z ikon */
+    --color-accent: oklch(75% 0.2 330);
+    --color-accent-content: oklch(98% 0.02 330);
+    
+    /* Neutral - bazujący na niebieskim z ikon */
+    --color-neutral: oklch(75% 0.1 250);
+    --color-neutral-content: oklch(98% 0.02 250);
+    
+    /* Status colors - dopasowane do palety ikon */
+    --color-info: oklch(50% 0.15 250);
+    --color-info-content: oklch(98% 0.02 250);
+    --color-success: oklch(60% 0.25 150);
+    --color-success-content: oklch(98% 0.02 150);
+    --color-warning: oklch(85% 0.25 85);
+    --color-warning-content: oklch(25% 0.05 85);
+    --color-error: oklch(65% 0.25 30);
+    --color-error-content: oklch(98% 0.02 30);
+    
+    /* Border radius - playful rounded corners */
+    --radius-selector: 1.25rem;
+    --radius-field: 0.75rem;
+    --radius-box: 1rem;
+    
+    /* Base sizes */
+    --size-selector: 0.25rem;
+    --size-field: 0.25rem;
+    
+    /* Border size - slightly thicker for dark theme */
+    --border: 2.5px;
+    
+    /* Effects - enhanced for dark theme */
+    --depth: 1.2;
+    --noise: 0.15;
+}

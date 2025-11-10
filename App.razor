@@ -1,12 +1,45 @@
-﻿<Router AppAssembly="@typeof(App).Assembly">
-    <Found Context="routeData">
-        <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)"/>
-        <FocusOnNavigate RouteData="@routeData" Selector="h1"/>
-    </Found>
-    <NotFound>
-        <PageTitle>Not found</PageTitle>
-        <LayoutView Layout="@typeof(MainLayout)">
-            <p role="alert">Sorry, there's nothing at this address.</p>
-        </LayoutView>
-    </NotFound>
-</Router>
+﻿@using Blazored.LocalStorage
+@using WAAI.Core.Services
+@inject ILocalStorageService LocalStorage
+@inject MessageService MessageService
+@implements IDisposable
+
+<div data-theme="@_currentTheme">
+    <Router AppAssembly="@typeof(App).Assembly">
+        <Found Context="routeData">
+            <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)"/>
+            <FocusOnNavigate RouteData="@routeData" Selector="h1"/>
+        </Found>
+        <NotFound>
+            <PageTitle>Not found</PageTitle>
+            <LayoutView Layout="@typeof(MainLayout)">
+                <p role="alert">Sorry, there's nothing at this address.</p>
+            </LayoutView>
+        </NotFound>
+    </Router>
+</div>
+
+@code {
+    private string _currentTheme = "waai-theme";
+
+    protected override async Task OnInitializedAsync()
+    {
+        _currentTheme = await LocalStorage.GetItemAsync<string>("theme") ?? "waai-theme";
+        MessageService.Subscribe(HandleMessage);
+    }
+
+    private void HandleMessage(string messageType, object payload)
+    {
+        if (messageType == "ThemeChanged" && payload is string theme)
+        {
+            _currentTheme = theme;
+            StateHasChanged();
+        }
+    }
+
+    public void Dispose()
+    {
+        MessageService.Unsubscribe(HandleMessage);
+    }
+}
+

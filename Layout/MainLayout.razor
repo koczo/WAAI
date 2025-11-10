@@ -1,6 +1,9 @@
 ﻿@using WAAI.Core.Components
 @using Blazored.LocalStorage
+@using WAAI.Core.Services
 @inject ILocalStorageService LocalStorage
+@inject MessageService MessageService
+@implements IDisposable
 @inherits LayoutComponentBase
 
 @if (_horizontalMenu)
@@ -26,18 +29,6 @@ else
     <div class="drawer lg:drawer-open">
         <input id="main-drawer" type="checkbox" class="drawer-toggle"/>
         <div class="drawer-content flex flex-col min-h-screen">
-            <div class="navbar bg-base-100 shadow-sm">
-                <div class="flex-none lg:hidden">
-                    <label for="main-drawer" class="btn btn-square btn-ghost">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                             class="inline-block w-6 h-6 stroke-current">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                  d="M4 6h16M4 12h16M4 18h16"></path>
-                        </svg>
-                    </label>
-                </div>
-                <div class="flex-1"></div>
-            </div>
             <main class="flex-1 p-6 bg-base-200 min-h-0">
                 @Body
             </main>
@@ -48,9 +39,7 @@ else
                 <div class="flex-1">
                     <NavMenu/>
                 </div>
-                <div class="p-4 text-center">
-                    <AppVersion/>
-                </div>
+                
             </div>
         </div>
     </div>
@@ -62,5 +51,20 @@ else
     protected override async Task OnInitializedAsync()
     {
         _horizontalMenu = await LocalStorage.GetItemAsync<bool>("horizontalMenu");
+        MessageService.Subscribe(HandleMessage);
+    }
+
+    private void HandleMessage(string messageType, object payload)
+    {
+        if (messageType == "MenuStyleChanged" && payload is bool horizontalMenu)
+        {
+            _horizontalMenu = horizontalMenu;
+            StateHasChanged();
+        }
+    }
+
+    public void Dispose()
+    {
+        MessageService.Unsubscribe(HandleMessage);
     }
 }
