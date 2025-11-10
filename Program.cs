@@ -3,6 +3,7 @@ using FluentValidation;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using WAAI;
+using WAAI.Core.Configuration;
 using WAAI.Core.Services;
 using WAAI.Features.Examples.UserOnboarding.Steps.Account;
 using WAAI.Features.Examples.UserOnboarding.Steps.Personal;
@@ -11,6 +12,11 @@ using WAAI.Features.Examples.UserOnboarding.Steps.Preferences;
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
+
+builder.Configuration.AddJsonFile("appsettings.json").Build();
+
+builder.Services.Configure<AppSettingsOptions>(options =>
+    builder.Configuration.GetSection("AppSettings").Bind(options));
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 builder.Services.AddBlazoredLocalStorage();

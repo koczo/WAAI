@@ -1,9 +1,13 @@
 @page "/settings"
 @using Blazored.LocalStorage
+@using Microsoft.Extensions.Options
+@using WAAI.Core.Configuration
+@using WAAI.Core.Extensions
+@using WAAI.Core.LocalStorageItems
 @using WAAI.Core.Services
 @inject ILocalStorageService LocalStorage
-@inject NavigationManager Navigation
 @inject MessageService MessageService
+@inject IOptions<AppSettingsOptions> AppSettings
 
 <PageTitle>Settings</PageTitle>
 
@@ -16,15 +20,15 @@
             <div class="form-control">
                 <label class="label cursor-pointer">
                     <span class="label-text">Vertical Menu (Sidebar)</span>
-                    <input type="radio" name="menu-style" class="radio radio-primary" 
-                           checked="@(!_horizontalMenu)" @onchange="@(() => SetMenuStyle(false))"/>
+                    <input type="radio" name="menu-style" class="radio radio-primary"
+                           checked="@(!_horizontalMenu.Value)" @onchange="@(() => SetMenuStyle(false))"/>
                 </label>
             </div>
             <div class="form-control">
                 <label class="label cursor-pointer">
                     <span class="label-text">Horizontal Menu (Top Bar)</span>
-                    <input type="radio" name="menu-style" class="radio radio-primary" 
-                           checked="@_horizontalMenu" @onchange="@(() => SetMenuStyle(true))"/>
+                    <input type="radio" name="menu-style" class="radio radio-primary"
+                           checked="@_horizontalMenu.Value" @onchange="@(() => SetMenuStyle(true))"/>
                 </label>
             </div>
 
@@ -37,42 +41,113 @@
             <div class="dropdown">
                 <div tabindex="0" role="button" class="btn m-1">
                     Theme
-                    <svg width="12px" height="12px" class="inline-block h-2 w-2 fill-current opacity-60" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 2048"><path d="M1799 349l242 241-1017 1017L7 590l242-241 775 775 775-775z"></path></svg>
+                    <svg width="12px" height="12px" class="inline-block h-2 w-2 fill-current opacity-60"
+                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 2048">
+                        <path d="M1799 349l242 241-1017 1017L7 590l242-241 775 775 775-775z"></path>
+                    </svg>
                 </div>
-                <ul tabindex="0" class="dropdown-content bg-base-300 rounded-box z-[1] w-52 p-2 shadow-2xl max-h-96 overflow-y-auto">
-                    <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Light" value="light" checked="@(_currentTheme == "light")" @onchange="OnThemeChanged"/></li>
-                    <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Dark" value="dark" checked="@(_currentTheme == "dark")" @onchange="OnThemeChanged"/></li>
-                    <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Cupcake" value="cupcake" @onchange="OnThemeChanged"/></li>
-                    <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Bumblebee" value="bumblebee" @onchange="OnThemeChanged"/></li>
-                    <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Emerald" value="emerald" @onchange="OnThemeChanged"/></li>
-                    <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Corporate" value="corporate" @onchange="OnThemeChanged"/></li>
-                    <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Synthwave" value="synthwave" @onchange="OnThemeChanged"/></li>
-                    <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Retro" value="retro" @onchange="OnThemeChanged"/></li>
-                    <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Cyberpunk" value="cyberpunk" @onchange="OnThemeChanged"/></li>
-                    <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Valentine" value="valentine" @onchange="OnThemeChanged"/></li>
-                    <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Halloween" value="halloween" @onchange="OnThemeChanged"/></li>
-                    <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Garden" value="garden" @onchange="OnThemeChanged"/></li>
-                    <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Forest" value="forest" @onchange="OnThemeChanged"/></li>
-                    <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Aqua" value="aqua" @onchange="OnThemeChanged"/></li>
-                    <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Lofi" value="lofi" @onchange="OnThemeChanged"/></li>
-                    <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Pastel" value="pastel" @onchange="OnThemeChanged"/></li>
-                    <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Fantasy" value="fantasy" @onchange="OnThemeChanged"/></li>
-                    <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Wireframe" value="wireframe" @onchange="OnThemeChanged"/></li>
-                    <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Black" value="black" @onchange="OnThemeChanged"/></li>
-                    <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Luxury" value="luxury" @onchange="OnThemeChanged"/></li>
-                    <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Dracula" value="dracula" @onchange="OnThemeChanged"/></li>
-                    <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="CMYK" value="cmyk" @onchange="OnThemeChanged"/></li>
-                    <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Autumn" value="autumn" @onchange="OnThemeChanged"/></li>
-                    <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Business" value="business" @onchange="OnThemeChanged"/></li>
-                    <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Acid" value="acid" @onchange="OnThemeChanged"/></li>
-                    <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Lemonade" value="lemonade" @onchange="OnThemeChanged"/></li>
-                    <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Night" value="night" @onchange="OnThemeChanged"/></li>
-                    <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Coffee" value="coffee" @onchange="OnThemeChanged"/></li>
-                    <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Winter" value="winter" @onchange="OnThemeChanged"/></li>
-                    <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Dim" value="dim" @onchange="OnThemeChanged"/></li>
-                    <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Nord" value="nord" @onchange="OnThemeChanged"/></li>
-                    <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Sunset" value="sunset" @onchange="OnThemeChanged"/></li>
-                    <li><input type="radio" name="theme-dropdown" class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="waai-theme" value="waai-theme" @onchange="OnThemeChanged"/></li>
+                <ul tabindex="0"
+                    class="dropdown-content bg-base-300 rounded-box z-[1] w-52 p-2 shadow-2xl max-h-96 overflow-y-auto">
+                    <li><input type="radio" name="theme-dropdown"
+                               class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Light"
+                               value="light" checked="@(_currentTheme.Value == "light")" @onchange="OnThemeChanged"/>
+                    </li>
+                    <li><input type="radio" name="theme-dropdown"
+                               class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Dark"
+                               value="dark" checked="@(_currentTheme.Value == "dark")" @onchange="OnThemeChanged"/></li>
+                    <li><input type="radio" name="theme-dropdown"
+                               class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                               aria-label="Cupcake" value="cupcake" @onchange="OnThemeChanged"/></li>
+                    <li><input type="radio" name="theme-dropdown"
+                               class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                               aria-label="Bumblebee" value="bumblebee" @onchange="OnThemeChanged"/></li>
+                    <li><input type="radio" name="theme-dropdown"
+                               class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                               aria-label="Emerald" value="emerald" @onchange="OnThemeChanged"/></li>
+                    <li><input type="radio" name="theme-dropdown"
+                               class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                               aria-label="Corporate" value="corporate" @onchange="OnThemeChanged"/></li>
+                    <li><input type="radio" name="theme-dropdown"
+                               class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                               aria-label="Synthwave" value="synthwave" @onchange="OnThemeChanged"/></li>
+                    <li><input type="radio" name="theme-dropdown"
+                               class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Retro"
+                               value="retro" @onchange="OnThemeChanged"/></li>
+                    <li><input type="radio" name="theme-dropdown"
+                               class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                               aria-label="Cyberpunk" value="cyberpunk" @onchange="OnThemeChanged"/></li>
+                    <li><input type="radio" name="theme-dropdown"
+                               class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                               aria-label="Valentine" value="valentine" @onchange="OnThemeChanged"/></li>
+                    <li><input type="radio" name="theme-dropdown"
+                               class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                               aria-label="Halloween" value="halloween" @onchange="OnThemeChanged"/></li>
+                    <li><input type="radio" name="theme-dropdown"
+                               class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Garden"
+                               value="garden" @onchange="OnThemeChanged"/></li>
+                    <li><input type="radio" name="theme-dropdown"
+                               class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Forest"
+                               value="forest" @onchange="OnThemeChanged"/></li>
+                    <li><input type="radio" name="theme-dropdown"
+                               class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Aqua"
+                               value="aqua" @onchange="OnThemeChanged"/></li>
+                    <li><input type="radio" name="theme-dropdown"
+                               class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Lofi"
+                               value="lofi" @onchange="OnThemeChanged"/></li>
+                    <li><input type="radio" name="theme-dropdown"
+                               class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Pastel"
+                               value="pastel" @onchange="OnThemeChanged"/></li>
+                    <li><input type="radio" name="theme-dropdown"
+                               class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                               aria-label="Fantasy" value="fantasy" @onchange="OnThemeChanged"/></li>
+                    <li><input type="radio" name="theme-dropdown"
+                               class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                               aria-label="Wireframe" value="wireframe" @onchange="OnThemeChanged"/></li>
+                    <li><input type="radio" name="theme-dropdown"
+                               class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Black"
+                               value="black" @onchange="OnThemeChanged"/></li>
+                    <li><input type="radio" name="theme-dropdown"
+                               class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Luxury"
+                               value="luxury" @onchange="OnThemeChanged"/></li>
+                    <li><input type="radio" name="theme-dropdown"
+                               class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                               aria-label="Dracula" value="dracula" @onchange="OnThemeChanged"/></li>
+                    <li><input type="radio" name="theme-dropdown"
+                               class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="CMYK"
+                               value="cmyk" @onchange="OnThemeChanged"/></li>
+                    <li><input type="radio" name="theme-dropdown"
+                               class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Autumn"
+                               value="autumn" @onchange="OnThemeChanged"/></li>
+                    <li><input type="radio" name="theme-dropdown"
+                               class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                               aria-label="Business" value="business" @onchange="OnThemeChanged"/></li>
+                    <li><input type="radio" name="theme-dropdown"
+                               class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Acid"
+                               value="acid" @onchange="OnThemeChanged"/></li>
+                    <li><input type="radio" name="theme-dropdown"
+                               class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                               aria-label="Lemonade" value="lemonade" @onchange="OnThemeChanged"/></li>
+                    <li><input type="radio" name="theme-dropdown"
+                               class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Night"
+                               value="night" @onchange="OnThemeChanged"/></li>
+                    <li><input type="radio" name="theme-dropdown"
+                               class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Coffee"
+                               value="coffee" @onchange="OnThemeChanged"/></li>
+                    <li><input type="radio" name="theme-dropdown"
+                               class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Winter"
+                               value="winter" @onchange="OnThemeChanged"/></li>
+                    <li><input type="radio" name="theme-dropdown"
+                               class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Dim"
+                               value="dim" @onchange="OnThemeChanged"/></li>
+                    <li><input type="radio" name="theme-dropdown"
+                               class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Nord"
+                               value="nord" @onchange="OnThemeChanged"/></li>
+                    <li><input type="radio" name="theme-dropdown"
+                               class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Sunset"
+                               value="sunset" @onchange="OnThemeChanged"/></li>
+                    <li><input type="radio" name="theme-dropdown"
+                               class="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                               aria-label="waai-theme" value="waai-theme" @onchange="OnThemeChanged"/></li>
                 </ul>
             </div>
         </div>
@@ -80,19 +155,20 @@
 </div>
 
 @code {
-    private bool _horizontalMenu;
-    private string _currentTheme;
+    private readonly StorageItem.IsHorizontalMenu _horizontalMenu = new();
+    private readonly StorageItem.CurrentTheme _currentTheme = new();
 
     protected override async Task OnInitializedAsync()
     {
-        _horizontalMenu = await LocalStorage.GetItemAsync<bool>("horizontalMenu");
-        _currentTheme = await LocalStorage.GetItemAsync<string>("theme") ?? "waai-theme";
+        await _horizontalMenu.InitItemAsync(LocalStorage);
+        await _currentTheme!.InitItemAsync(LocalStorage, AppSettings.Value.DefaultTheme);
     }
 
     private async Task SetMenuStyle(bool horizontal)
     {
-        _horizontalMenu = horizontal;
-        await LocalStorage.SetItemAsync("horizontalMenu", horizontal);
+        _horizontalMenu.Value = horizontal;
+        await _horizontalMenu.SetItemAsync(LocalStorage);
+
         MessageService.SendMessage("MenuStyleChanged", horizontal);
     }
 
@@ -100,8 +176,11 @@
     {
         var theme = e.Value?.ToString();
         if (string.IsNullOrEmpty(theme)) return;
-        
-        await LocalStorage.SetItemAsync("theme", theme);
+
+        _currentTheme.Value = theme;
+        await _currentTheme.SetItemAsync(LocalStorage);
+
         MessageService.SendMessage("ThemeChanged", theme);
     }
+
 }

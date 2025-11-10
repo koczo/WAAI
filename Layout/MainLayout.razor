@@ -1,9 +1,9 @@
-﻿@using WAAI.Core.Components
-@using Blazored.LocalStorage
-@using WAAI.Core.Services
-@inject ILocalStorageService LocalStorage
+﻿@inject ILocalStorageService LocalStorage
 @inject MessageService MessageService
 @implements IDisposable
+@using Blazored.LocalStorage
+@using WAAI.Core.Components
+@using WAAI.Core.Services
 @inherits LayoutComponentBase
 
 @if (_horizontalMenu)
@@ -14,7 +14,7 @@
                 <NavMenu/>
             </div>
         </div>
-        <main class="flex-1 p-6 bg-base-200">
+        <main class="flex-1 bg-base-200">
             @Body
         </main>
         <footer class="footer footer-center p-4 bg-base-300 text-base-content">
@@ -29,7 +29,7 @@ else
     <div class="drawer lg:drawer-open">
         <input id="main-drawer" type="checkbox" class="drawer-toggle"/>
         <div class="drawer-content flex flex-col min-h-screen">
-            <main class="flex-1 p-6 bg-base-200 min-h-0">
+            <main class="flex-1 bg-base-200 min-h-0">
                 @Body
             </main>
         </div>
@@ -39,7 +39,7 @@ else
                 <div class="flex-1">
                     <NavMenu/>
                 </div>
-                
+
             </div>
         </div>
     </div>
@@ -67,4 +67,5 @@ else
     {
         MessageService.Unsubscribe(HandleMessage);
     }
+
 }

@@ -22,8 +22,13 @@ try {
     git commit -m $Message
     if ($LASTEXITCODE -ne 0) { throw "Commit failed" }
 
-    Write-Host "`nPushing to remote..." -ForegroundColor Cyan
-    git push origin master
+    # Determine current branch and push there (safer than hardcoding 'master')
+    Write-Host "`nDetermining current git branch..." -ForegroundColor Cyan
+    $branch = (git rev-parse --abbrev-ref HEAD).Trim()
+    if ([string]::IsNullOrWhiteSpace($branch)) { throw "Failed to determine current branch" }
+
+    Write-Host "`nPushing to remote branch '$branch'..." -ForegroundColor Cyan
+    git push origin $branch
     if ($LASTEXITCODE -ne 0) { throw "Push failed" }
 
     Write-Host "`nSUCCESS: Changes committed and pushed!" -ForegroundColor Green

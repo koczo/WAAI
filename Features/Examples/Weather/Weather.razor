@@ -3,7 +3,7 @@
 
 <PageTitle>Weather</PageTitle>
 
-<div class="max-w-6xl mx-auto">
+<div class="max-w-6xl mx-auto m-6">
     <h1 class="text-4xl font-bold mb-4">Weather</h1>
     <p class="mb-6">This component demonstrates fetching data from the server.</p>
 
@@ -90,19 +90,22 @@
         public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
     }
 
-    private string GetWeatherIcon(string? summary) => summary switch
+    private string GetWeatherIcon(string? summary)
     {
-        "Freezing" => "❄️",
-        "Bracing" => "🌬️",
-        "Chilly" => "🧊",
-        "Cool" => "🌫️",
-        "Mild" => "☁️",
-        "Warm" => "☀️",
-        "Balmy" => "🌤️",
-        "Hot" => "🔥",
-        "Sweltering" => "🌡️",
-        "Scorching" => "🌪️",
-        _ => "🌤️"
-    };
+        return summary switch
+        {
+            "Freezing" => "❄️",
+            "Bracing" => "🌬️",
+            "Chilly" => "🧊",
+            "Cool" => "🌫️",
+            "Mild" => "☁️",
+            "Warm" => "☀️",
+            "Balmy" => "🌤️",
+            "Hot" => "🔥",
+            "Sweltering" => "🌡️",
+            "Scorching" => "🌪️",
+            _ => "🌤️"
+        };
+    }
 
 }

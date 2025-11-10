@@ -1,8 +1,11 @@
-﻿@using Blazored.LocalStorage
-@using WAAI.Core.Services
-@inject ILocalStorageService LocalStorage
+﻿@inject ILocalStorageService LocalStorage
 @inject MessageService MessageService
+@using Blazored.LocalStorage
+@using Microsoft.Extensions.Options
+@using WAAI.Core.Configuration
+@using WAAI.Core.Services
 @implements IDisposable
+@inject IOptions<AppSettingsOptions> AppSettings
 
 <div data-theme="@_currentTheme">
     <Router AppAssembly="@typeof(App).Assembly">
@@ -20,11 +23,11 @@
 </div>
 
 @code {
-    private string _currentTheme = "waai-theme";
+    private string _currentTheme = string.Empty;
 
     protected override async Task OnInitializedAsync()
     {
-        _currentTheme = await LocalStorage.GetItemAsync<string>("theme") ?? "waai-theme";
+        _currentTheme = await LocalStorage.GetItemAsync<string>("theme") ?? AppSettings.Value.DefaultTheme;
         MessageService.Subscribe(HandleMessage);
     }
 
@@ -41,5 +44,6 @@
     {
         MessageService.Unsubscribe(HandleMessage);
     }
+
 }
 
